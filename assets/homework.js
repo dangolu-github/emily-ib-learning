@@ -69,7 +69,14 @@
     }
 
     function setStatus(message, stateName) {
+      if (stateName === "saving" || stateName === "saved" || stateName === "retry") {
+        status.textContent = "";
+        status.hidden = true;
+        status.dataset.state = "";
+        return;
+      }
       status.textContent = message;
+      status.hidden = !message;
       status.dataset.state = stateName || "";
     }
 

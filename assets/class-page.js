@@ -45,13 +45,10 @@
 
     const actions = document.createElement("div");
     actions.className = "homework-actions";
-    const status = textElement(
-      "p",
-      "form-status",
-      "Your draft will sync privately after you start writing.",
-    );
+    const status = textElement("p", "form-status", "");
     status.id = "homework-status";
     status.setAttribute("aria-live", "polite");
+    status.hidden = true;
     const submit = textElement("button", "", "Submit to teacher");
     submit.type = "submit";
     submit.id = "homework-submit";
@@ -78,23 +75,20 @@
       return;
     }
 
-    container.append(textElement("p", "", review.introduction));
-    review.points.forEach((point) => {
-      const article = document.createElement("article");
-      article.className = "review-point";
-      article.append(textElement("h3", "", point.title), textElement("p", "", point.body));
-      container.append(article);
-    });
+    if (Array.isArray(review.groups)) {
+      review.groups.forEach((group) => {
+        const section = document.createElement("section");
+        section.className = "review-group";
+        section.append(textElement("h3", "", group.title));
+        const list = document.createElement("ul");
+        group.items.forEach((item) => list.append(textElement("li", "", item)));
+        section.append(list);
+        container.append(section);
+      });
+      return;
+    }
 
-    [
-      ["What you did well", review.strength],
-      ["Your next step", review.nextStep],
-    ].forEach(([heading, body]) => {
-      const note = document.createElement("div");
-      note.className = "review-note";
-      note.append(textElement("h3", "", heading), textElement("p", "", body));
-      container.append(note);
-    });
+    if (review.introduction) container.append(textElement("p", "", review.introduction));
   }
 
   function render() {
