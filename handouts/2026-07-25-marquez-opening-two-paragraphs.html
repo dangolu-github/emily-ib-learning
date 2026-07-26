@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper 1 Speech Annotation - Marquez</title>
+  <style>
+    :root {
+      --ink:#1f2933; --muted:#64707d; --line:#d8e0e8; --bg:#f4f6f8; --paper:#fff;
+      --magic:#dceeff; --magic2:#2d78bd;
+      --identity:#dff3e2; --identity2:#2f8a4a;
+      --violence:#ffe0dc; --violence2:#c84f45;
+      --audience:#eadfff; --audience2:#7855c8;
+      --structure:#fff0bd; --structure2:#a77b0a;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+    .page { max-width:1120px; margin:24px auto 56px; background:var(--paper); border:1px solid var(--line); box-shadow:0 12px 36px rgba(22,31,45,.08); }
+    header { padding:28px 34px 22px; border-bottom:1px solid var(--line); background:#fbfcfd; }
+    .content { padding:26px 34px 36px; }
+    h1,h2,h3 { margin:0; line-height:1.2; }
+    h1 { font-size:28px; }
+    h2 { margin:28px 0 12px; font-size:20px; }
+    h3 { margin:16px 0 8px; font-size:16px; }
+    p { margin:8px 0; }
+    .subhead,.small { color:var(--muted); }
+    .callout,.box { border:1px solid var(--line); background:#fbfcfd; padding:14px 16px; margin:14px 0; }
+    .callout { border-left:5px solid #44546a; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .legend { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:12px 0 18px; }
+    .legend div { border:1px solid var(--line); padding:10px; min-height:76px; font-size:13px; background:#fff; }
+    .swatch { display:inline-block; width:18px; height:12px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+    .diff { display:inline-flex; justify-content:center; align-items:center; min-width:22px; height:22px; margin-right:6px; border:1px solid currentColor; border-radius:4px; font:800 13px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:#fff; }
+    .dim { display:inline-flex; align-items:center; margin-left:4px; padding:1px 6px; border:1px solid currentColor; border-radius:10px; font-size:11px; font-weight:800; white-space:nowrap; vertical-align:1px; background:#fff; }
+    .d1 { color:#22784a; } .d2 { color:#7754c5; } .d3 { color:#a45d00; } .d4 { color:#9a7010; } .d5 { color:#2d72b8; } .d6 { color:#7d4b00; }
+    .plus { color:var(--identity2); } .tilde { color:var(--magic2); } .minus { color:var(--violence2); } .bang { color:var(--structure2); } .qmark { color:var(--audience2); }
+    mark { padding:1px 3px; border-radius:2px; color:inherit; }
+    mark.magic { background:var(--magic); box-shadow:inset 0 -2px 0 var(--magic2); }
+    mark.identity { background:var(--identity); box-shadow:inset 0 -2px 0 var(--identity2); }
+    mark.violence { background:var(--violence); box-shadow:inset 0 -2px 0 var(--violence2); }
+    mark.audience { background:var(--audience); box-shadow:inset 0 -2px 0 var(--audience2); }
+    mark.structure { background:var(--structure); box-shadow:inset 0 -2px 0 var(--structure2); }
+    sup.note { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; margin-left:2px; padding:0 4px; border-radius:9px; background:#26313d; color:#fff; font-size:11px; line-height:1; }
+    .annotated { border:1px solid var(--line); padding:20px 22px; background:#fff; }
+    .speech-title { text-align:center; font-weight:800; font-size:18px; margin:4px 0 16px; }
+    .para { position:relative; padding-left:42px; margin:14px 0; }
+    .pnum { position:absolute; left:0; top:0; width:28px; height:28px; border:1px solid var(--line); color:var(--muted); display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; background:#f7f9fb; }
+    table { width:100%; border-collapse:collapse; margin:12px 0 20px; background:#fff; }
+    th,td { border:1px solid var(--line); padding:10px 11px; vertical-align:top; text-align:left; }
+    th { background:#eef3f7; }
+    .notes th:first-child,.notes td:first-child { width:58px; text-align:center; font-weight:800; }
+    .blank { display:inline-block; min-width:150px; height:1.2em; border-bottom:1px solid #8b96a3; vertical-align:-2px; }
+    .wide-blank { display:block; width:100%; height:24px; border-bottom:1px solid #8b96a3; margin:6px 0; }
+    .phrase-bank { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .phrase-bank div { border:1px solid var(--line); background:#fbfcfd; padding:9px 10px; }
+    footer { border-top:1px solid var(--line); padding:16px 34px 24px; color:var(--muted); font-size:12px; background:#fbfcfd; }
+    @media (max-width:860px) {
+      .page{margin:10px 9px;} header,.content,footer{padding-left:18px;padding-right:18px;}
+      .grid,.legend,.phrase-bank{grid-template-columns:1fr;} .para{padding-left:0;} .pnum{position:static;margin-right:8px;}
+    }
+    @media print {
+      body{background:#fff;} .page{max-width:none;margin:0;border:0;box-shadow:none;}
+      header,.content,footer{padding-left:18mm;padding-right:18mm;} .box,.callout,.annotated,table{break-inside:avoid;}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Paper 1 Speech Annotation Handout</h1>
+      <p class="subhead">Gabriel Garcia Marquez, Nobel Lecture excerpt, "The Solitude of Latin America"</p>
+      <p><strong>Guiding question:</strong> How does Marquez use history, imagery, and collective voice to explain the "solitude" and identity of Latin America?</p>
+    </header>
+
+    <section class="content">
+      <section class="callout">
+        <h2>What To Memorize For Speech Analysis</h2>
+        <p><strong>Paper 1 formula:</strong> authorial choice -> effect -> purpose -> audience. Do not stop at naming the device.</p>
+        <p><strong>Speech framework:</strong> 0 contextual & situational elements, then 1 speaker positioning, 2 audience relationship, 3 persuasive appeals, 4 structure of argument, 5 rhetorical & stylistic devices, 6 diction/tone and speech-specific rhythm.</p>
+        <p><strong>For this speech:</strong> Marquez argues that Latin America seems "fantastic" because its real history is so extreme that ordinary language struggles to make it believable.</p>
+      </section>
+
+      <section class="grid">
+        <div class="box">
+          <h3>0. Contextual & Situational Elements</h3>
+          <p><strong>Speaker:</strong> Gabriel Garcia Marquez, Colombian novelist and Nobel laureate.</p>
+          <p><strong>Audience:</strong> Swedish Academy / European literary audience / global readers.</p>
+          <p><strong>Occasion:</strong> Nobel Lecture, 8 December 1982.</p>
+          <p><strong>Purpose:</strong> To explain Latin America's identity and ask the audience to understand its reality on its own terms.</p>
+        </div>
+        <div class="box">
+          <h3>Genre</h3>
+          <p><strong>Main genre:</strong> Nobel lecture / ceremonial speech.</p>
+          <p><strong>Also contains:</strong> cultural manifesto, historical testimony, political critique.</p>
+          <p><strong>Key move:</strong> Marquez begins with literature, then turns the Nobel audience toward history, suffering, and identity.</p>
+        </div>
+      </section>
+
+      <h2>Six Speech-Analysis Dimensions</h2>
+      <table>
+        <tr><th>Marker</th><th>Framework Dimension</th><th>What To Look For In Marquez</th><th>Quick Reminder</th></tr>
+        <tr><td><span class="dim d1">1 Speaker</span></td><td><strong>Speaker positioning</strong></td><td>"I" as Nobel winner, but more importantly "we/our" as representative Latin American witness.</td><td>Ask: who is the speaker making himself sound like?</td></tr>
+        <tr><td><span class="dim d2">2 Audience</span></td><td><strong>Audience relationship</strong></td><td>He addresses Europe indirectly, then translates Latin American suffering through Uppsala, the United States, and Norway.</td><td>Ask: how does he make this audience care or understand?</td></tr>
+        <tr><td><span class="dim d3">3 Appeals</span></td><td><strong>Persuasive appeals</strong></td><td>Ethos: Nobel laureate + witness. Pathos: death, exile, children. Logos: statistics and comparisons.</td><td>Do not write "he uses ethos/pathos/logos"; explain how the appeal changes the audience.</td></tr>
+        <tr><td><span class="dim d4">4 Structure</span></td><td><strong>Structure of argument</strong></td><td>Fantasy-like chronicles -> colonial greed -> political absurdity -> modern violence -> final thesis about solitude.</td><td>Track the shift from wonder to suffering.</td></tr>
+        <tr><td><span class="dim d5">5 Devices</span></td><td><strong>Rhetorical & stylistic devices</strong></td><td>Paradox, catalogue, allusion, contrast, comparison, accumulation, final aphoristic statement.</td><td>Name the device only if you can explain its effect.</td></tr>
+        <tr><td><span class="dim d6">6 Diction</span></td><td><strong>Diction, tone, rhythm</strong></td><td>Mythic diction, collective pronouns, emotive diction, short declarative pivots, cumulative lists.</td><td>Ask: what attitude does the language create?</td></tr>
+      </table>
+
+      <h2>Theme Highlighter Key</h2>
+      <p class="small">The highlighter colors show recurring ideas. The small badges beside each number show the framework dimension.</p>
+      <div class="legend">
+        <div><span class="swatch" style="background:var(--magic);border:1px solid var(--magic2)"></span><strong>Fantasy + reality</strong><br><span class="diff tilde">~</span>Magical realism / strange but true history.</div>
+        <div><span class="swatch" style="background:var(--identity);border:1px solid var(--identity2)"></span><strong>Identity + voice</strong><br><span class="diff plus">+</span>Collective "we," Latin American self-definition.</div>
+        <div><span class="swatch" style="background:var(--violence);border:1px solid var(--violence2)"></span><strong>Violence + suffering</strong><br><span class="diff minus">-</span>Political violence, death, exile, repression.</div>
+        <div><span class="swatch" style="background:var(--audience);border:1px solid var(--audience2)"></span><strong>Audience positioning</strong><br><span class="diff qmark">?</span>How Marquez addresses or pressures Europe.</div>
+        <div><span class="swatch" style="background:var(--structure);border:1px solid var(--structure2)"></span><strong>Structure + thesis</strong><br><span class="diff bang">!</span>Shift, turning point, final claim.</div>
+      </div>
+
+      <h2>Annotated Speech Excerpt</h2>
+      <div class="annotated">
+        <div class="speech-title">The Solitude of Latin America</div>
+        <p class="para"><span class="pnum">1</span>
+          Antonio Pigafetta, a Florentine navigator who went with Magellan on the first voyage around the world <span class="dim d5">5 Historical anecdote / exemplum</span>, wrote, upon his passage through
+          <mark class="identity">our southern lands of America</mark><sup class="note">1</sup><span class="dim d1">1 Speaker</span>,
+          <mark class="magic">a strictly accurate account that nonetheless resembles a venture into fantasy</mark><sup class="note">2</sup><span class="dim d5">5 Devices</span>.
+          In it he recorded <mark class="magic">impossible animals and a Patagonian "giant" terrified by his own image in a mirror</mark><span class="dim d5">5 Catalogue/imagery</span>.
+        </p>
+        <p class="para"><span class="pnum">2</span>
+          This short and fascinating book, which even then
+          <mark class="magic">contained the seeds of our present-day novels</mark><sup class="note">3</sup><span class="dim d1">1 Speaker</span><span class="dim d5">5 Metaphor</span>,
+          is by no means the most staggering account of
+          <mark class="identity">our reality</mark>. The Chronicles of the Indies left us countless others. Eldorado, the fountain of eternal youth, Atahualpa's ransom, and gold-filled landscapes appear as examples of
+          <mark class="magic">colonial myth becoming historical reality</mark><sup class="note">4</sup><span class="dim d5">5 Allusion</span>.
+          One founder's
+          <mark class="structure">lust for gold beset us until recently</mark><sup class="note">5</sup><span class="dim d4">4 Structure</span>.
+        </p>
+        <p class="para"><span class="pnum">3</span>
+          <mark class="structure">Our independence from Spanish domination did not put us beyond the reach of madness</mark><sup class="note">6</sup><span class="dim d4">4 Structure</span>.
+          Marquez then <mark class="magic">lists rulers who held a funeral for a lost leg, seated a corpse on a presidential chair, used a pendulum to detect poison, and tried to defeat scarlet fever with red paper on streetlamps</mark><span class="dim d5">5 Grotesque catalogue</span>. The comic strangeness becomes
+          <mark class="violence">a critique of political absurdity and dictatorship</mark><sup class="note">7</sup><span class="dim d6">6 Diction</span>.
+        </p>
+        <p class="para"><span class="pnum">4</span>
+          Eleven years ago, Pablo Neruda enlightened this audience with his word. Since then,
+          <mark class="audience">the Europeans of good will - and sometimes those of bad, as well</mark><sup class="note">8</sup><span class="dim d2">2 Audience</span>
+          have been struck by the
+          <mark class="magic">unearthly tidings of Latin America</mark><span class="dim d5">5 Mythic imagery</span>. But Marquez shifts sharply:
+          <mark class="structure">We have not had a moment's rest</mark><sup class="note">9</sup><span class="dim d4">4 Structure</span>.
+          He then <mark class="violence">names wars, coups, ethnocide, infant deaths, disappearances, imprisoned mothers, and mass political death</mark><span class="dim d5">5 Accumulation</span>.
+        </p>
+        <p class="para"><span class="pnum">5</span>
+          <mark class="violence">Twenty million Latin American children died before the age of one</mark><sup class="note">10</sup><span class="dim d3">3 Appeals</span>.
+          Those missing because of repression number nearly one hundred and twenty thousand,
+          <mark class="audience">as if no one could account for all the inhabitants of Uppsala</mark><sup class="note">11</sup><span class="dim d2">2 Audience</span>.
+          If this had happened in the United States, the corresponding figure would be
+          <mark class="audience">one million six hundred thousand violent deaths in four years</mark><span class="dim d5">5 Analogy</span>. One million people have fled Chile; Uruguay has lost one out of every five citizens; El Salvador produces almost one refugee every twenty minutes <span class="dim d5">5 Statistical accumulation</span>.
+        </p>
+        <p class="para"><span class="pnum">6</span>
+          <mark class="structure">I dare to think that it is this outsized reality, and not just its literary expression</mark><sup class="note">12</sup><span class="dim d4">4 Structure</span>,
+          that has deserved the attention of the Swedish Academy of Letters. A reality not of paper lives within Latin Americans and nourishes creativity.
+          <mark class="identity">Poets and beggars, musicians and prophets, warriors and scoundrels</mark><sup class="note">13</sup><span class="dim d1">1 Speaker</span>
+          have had to ask little of imagination, because the problem is
+          <mark class="structure">a lack of conventional means to render our lives believable. This, my friends, is the crux of our solitude</mark><sup class="note">14</sup><span class="dim d4">4 Structure</span>.
+        </p>
+      </div>
+
+      <h2>Rhetorical & Stylistic Devices Map</h2>
+      <p class="small">Use this to study Dimension 5. You do not need to write about every device in an essay; choose the devices that best support your argument.</p>
+      <table>
+        <tr><th>Device / Choice</th><th>Example In The Speech</th><th>Effect</th></tr>
+        <tr><td><strong>Historical anecdote / exemplum</strong></td><td>The opening story from Pigafetta's travel account.</td><td>Works as a narrative hook and a concrete example that introduces the speech's central idea: Latin American reality can sound like fantasy.</td></tr>
+        <tr><td><strong>Historical allusion</strong></td><td>Pigafetta, Magellan, Eldorado, Atahualpa, Neruda.</td><td>Gives the speech cultural authority and places Latin America inside a long history of European encounter and misreading.</td></tr>
+        <tr><td><strong>Paradox</strong></td><td>"Strictly accurate" but like "fantasy."</td><td>Introduces the central tension: Latin American reality appears unbelievable to outsiders.</td></tr>
+        <tr><td><strong>Catalogue / enumeration</strong></td><td>Animals, colonial myths, strange rulers, wars, deaths, exiles.</td><td>Creates abundance and accumulation, making Latin America's reality feel overwhelming.</td></tr>
+        <tr><td><strong>Grotesque imagery</strong></td><td>Funeral for a lost leg; corpse seated on a presidential chair; red-paper streetlamps.</td><td>Blends comedy and horror to expose political absurdity.</td></tr>
+        <tr><td><strong>Metaphor</strong></td><td>"Seeds of our present-day novels"; "crux of our solitude."</td><td>Turns history into the origin of literature and gives the final idea a memorable shape.</td></tr>
+        <tr><td><strong>Mythic / magical diction</strong></td><td>"Unearthly tidings," "haunted men," "historic women."</td><td>Creates a legendary tone while preparing the audience to see that the legend is grounded in reality.</td></tr>
+        <tr><td><strong>Loaded / emotive diction</strong></td><td>"Madness," "ethnocide," "repression," "ill-fated," "violent deaths."</td><td>Gives the historical evidence moral force and prevents the audience from reading the suffering neutrally.</td></tr>
+        <tr><td><strong>Contrast</strong></td><td>Fantasy vs accuracy; literary expression vs outsized reality; sorrow vs beauty.</td><td>Shows the double nature of Latin American experience: imaginative and historical, creative and painful.</td></tr>
+        <tr><td><strong>Statistical accumulation</strong></td><td>Twenty million children, 120,000 missing, one refugee every twenty minutes.</td><td>Uses logos to intensify pathos; suffering becomes measurable and difficult to dismiss.</td></tr>
+        <tr><td><strong>Analogy / comparison</strong></td><td>Uppsala, United States, Norway.</td><td>Translates Latin American suffering into terms the European audience can understand.</td></tr>
+        <tr><td><strong>Aphoristic closure</strong></td><td>"This, my friends, is the crux of our solitude."</td><td>Compresses the speech's argument into a final memorable thesis.</td></tr>
+      </table>
+
+      <h2>Numbered Annotation Notes</h2>
+      <table class="notes">
+        <tr><th>#</th><th>Framework Dimension</th><th>What To Notice</th><th>Paper 1 Effect</th></tr>
+        <tr><td>1</td><td>1. Speaker positioning</td><td>Collective possessive pronoun: "our."</td><td>Marquez speaks as a representative of Latin America, not only as an individual writer.</td></tr>
+        <tr><td>2</td><td>5. Rhetorical/stylistic devices</td><td>Paradox: "strictly accurate" but "fantasy."</td><td>Introduces the central idea: Latin American reality can look unbelievable to outsiders.</td></tr>
+        <tr><td>3</td><td>1. Speaker positioning</td><td>Meta-literary claim: history contains the "seeds" of novels.</td><td>Links magical realism to lived history, not decorative imagination.</td></tr>
+        <tr><td>4</td><td>5. Rhetorical/stylistic devices</td><td>Allusions to conquest myths: Eldorado, eternal youth, Atahualpa's ransom.</td><td>Shows how Latin America was shaped by European fantasy, greed, and misreading.</td></tr>
+        <tr><td>5</td><td>4. Structure of argument</td><td>Structural bridge from colonial past to "until recently."</td><td>Prepares the reader to see exploitation as ongoing, not safely historical.</td></tr>
+        <tr><td>6</td><td>4. Structure of argument</td><td>Turning point: independence did not end "madness."</td><td>Moves from colonial myth to postcolonial political instability.</td></tr>
+        <tr><td>7</td><td>6. Diction, tone, rhythm</td><td>Grotesque catalogue of rulers.</td><td>The bizarre details are darkly comic, but they expose real authoritarian absurdity.</td></tr>
+        <tr><td>8</td><td>2. Audience relationship</td><td>Direct audience positioning: Europeans are named.</td><td>The Nobel audience becomes morally involved, not just entertained by exotic stories.</td></tr>
+        <tr><td>9</td><td>4. Structure of argument</td><td>Short declarative sentence.</td><td>Creates a hard shift from literary wonder to exhaustion and suffering.</td></tr>
+        <tr><td>10</td><td>3. Persuasive appeals</td><td>Statistics and scale.</td><td>Logos supports pathos; the suffering is not vague, but measurable.</td></tr>
+        <tr><td>11</td><td>2. Audience relationship</td><td>Comparison to Uppsala / United States.</td><td>Translates Latin American suffering into terms a European or Western audience can grasp.</td></tr>
+        <tr><td>12</td><td>4. Structure of argument</td><td>Thesis shift: "not just its literary expression."</td><td>Marquez argues that the Nobel Prize recognizes a reality, not merely a style.</td></tr>
+        <tr><td>13</td><td>1. Speaker positioning</td><td>Inclusive catalogue of Latin American figures.</td><td>Builds collective identity across class, art, politics, and morality.</td></tr>
+        <tr><td>14</td><td>4. Structure of argument</td><td>Final thesis: "lack of conventional means" and "crux of our solitude."</td><td>Solitude means being unable to make one's reality believable to outsiders.</td></tr>
+      </table>
+
+      <h2>Sequence-Based Paragraph Plan</h2>
+      <p class="small">Follow the order of the speech. Each body paragraph should still have a rich idea, but the analysis moves through the text in sequence.</p>
+      <table>
+        <tr><th>Text Movement</th><th>Paragraph Focus</th><th>Main Framework Dimensions</th><th>Evidence To Use</th><th>Your Topic Sentence</th></tr>
+        <tr>
+          <td><strong>Opening</strong></td>
+          <td><strong>Historical anecdote as narrative hook</strong></td>
+          <td>5. Devices + 1. Speaker positioning</td>
+          <td>#1, #2, #3</td>
+          <td>Marquez opens with Pigafetta's historical anecdote to establish the paradox that Latin American reality can appear fantastical even when it is presented as factual.</td>
+        </tr>
+        <tr>
+          <td><strong>Development 1</strong></td>
+          <td><strong>Colonial myth and political absurdity</strong></td>
+          <td>5. Devices + 4. Structure + 6. Diction/tone</td>
+          <td>#4, #5, #6, #7</td>
+          <td><span class="wide-blank"></span></td>
+        </tr>
+        <tr>
+          <td><strong>Development 2</strong></td>
+          <td><strong>Shift from wonder to modern suffering</strong></td>
+          <td>4. Structure + 3. Appeals + 2. Audience relationship</td>
+          <td>#8, #9, #10, #11</td>
+          <td><span class="wide-blank"></span></td>
+        </tr>
+        <tr>
+          <td><strong>Ending</strong></td>
+          <td><strong>Final thesis: the crux of solitude</strong></td>
+          <td>4. Structure + 1. Speaker positioning</td>
+          <td>#12, #13, #14</td>
+          <td><span class="wide-blank"></span></td>
+        </tr>
+      </table>
+
+      <h2>Useful Paper 1 Phrases</h2>
+      <div class="phrase-bank">
+        <div>Marquez constructs himself as <span class="blank"></span> through <span class="blank"></span>.</div>
+        <div>The contrast between <span class="blank"></span> and <span class="blank"></span> suggests that <span class="blank"></span>.</div>
+        <div>The catalogue of examples creates <span class="blank"></span>, making the audience feel <span class="blank"></span>.</div>
+        <div>By comparing Latin America to <span class="blank"></span>, Marquez makes the suffering more legible to <span class="blank"></span>.</div>
+        <div>The final sentence crystallizes the speech's central argument: <span class="blank"></span>.</div>
+        <div>This authorial choice is effective because it moves the audience from <span class="blank"></span> to <span class="blank"></span>.</div>
+      </div>
+
+      <h2>Mini Thesis Practice</h2>
+      <div class="box">
+        <p><strong>Complete this thesis:</strong></p>
+        <p>In his Nobel lecture, Marquez uses <span class="blank"></span>, <span class="blank"></span>, and <span class="blank"></span> to argue that Latin America's solitude comes from <span class="blank"></span>.</p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
