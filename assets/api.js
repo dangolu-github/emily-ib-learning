@@ -5,12 +5,16 @@
     return window.EMILY_PORTAL_CONFIG?.serviceEndpoint || "";
   }
 
+  function usesRelay() {
+    return window.EMILY_PORTAL_CONFIG?.serviceTransport === "relay-post";
+  }
+
   function ready() {
     const value = endpoint();
     return Boolean(value && !value.includes("__EMILY_"));
   }
 
-  function jsonp(action, parameters) {
+  function legacyJsonp(action, parameters, targetEndpoint = endpoint()) {
     return new Promise((resolve, reject) => {
       if (!ready()) {
         reject(new Error("The private portal service is not configured."));
@@ -45,13 +49,50 @@
         callback: callbackName,
         _: String(Date.now()),
       });
-      script.src = `${endpoint()}?${query.toString()}`;
+      script.src = `${targetEndpoint}?${query.toString()}`;
       document.head.append(script);
     });
   }
 
+  async function relayPost(payload, keepalive) {
+    const response = await fetch(endpoint(), {
+      method: "POST",
+      mode: "cors",
+      keepalive: Boolean(keepalive),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      throw new Error("The private portal service is unavailable.");
+    }
+    return response.json();
+  }
+
+  function jsonp(action, parameters) {
+    if (!ready()) {
+      return Promise.reject(new Error("The private portal service is not configured."));
+    }
+    if (
+      action === "claimTeacherDevice" &&
+      window.EMILY_PORTAL_CONFIG?.teacherBridgeEndpoint
+    ) {
+      return legacyJsonp(
+        action,
+        parameters,
+        window.EMILY_PORTAL_CONFIG.teacherBridgeEndpoint,
+      );
+    }
+    if (usesRelay()) {
+      return relayPost({ ...parameters, action }, false);
+    }
+    return legacyJsonp(action, parameters);
+  }
+
   async function post(payload, keepalive) {
     if (!ready()) throw new Error("The private portal service is not configured.");
+    if (usesRelay()) {
+      return relayPost(payload, keepalive);
+    }
     await fetch(endpoint(), {
       method: "POST",
       mode: "no-cors",
