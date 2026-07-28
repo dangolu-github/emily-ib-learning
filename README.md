@@ -20,4 +20,7 @@ records, and backend source.
 GitHub Actions deploys only this build to the isolated
 `/emily-ib-learning/` path of the temporary Tencent CloudBase mirror. The
 workflow verifies `deployment-meta.json` against the pushed commit before
-reporting success. Tencent credentials remain in GitHub repository secrets.
+reporting success. It uses a dedicated, environment-bound CloudBase server API
+Key stored only as GitHub Secrets `TCB_API_KEY` and `TCB_ENV_ID`; it does not
+use CAM `SecretId`/`SecretKey` credentials. Rotate the current key before
+2027-01-24 02:15:39 UTC.
