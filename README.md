@@ -17,13 +17,16 @@ GitHub `main` remains canonical. `npm run build:cloudbase` creates
 teacher route, Edge Functions, repository operations, planning files, private
 records, and backend source.
 
-GitHub Actions deploys only this build to the isolated
-`/emily-ib-learning/` path of the temporary Tencent CloudBase mirror. The
-workflow verifies `deployment-meta.json` against the pushed commit before
-reporting success. It uses a dedicated, environment-bound CloudBase server API
-Key stored only as GitHub Secrets `TCB_API_KEY` and `TCB_ENV_ID`; it does not
-use CAM `SecretId`/`SecretKey` credentials. Rotate the current key before
-2027-01-24 02:15:39 UTC.
+GitHub Actions deploys only this build at the root of the neutral
+`english-teaching` CloudBase environment. Emily is the temporary learner
+content in that environment; the environment and application names do not
+contain a student identity. The workflow verifies `deployment-meta.json`
+against the pushed commit before reporting success. It uses a dedicated,
+environment-bound CloudBase server API Key stored only as GitHub Secrets
+`TCB_API_KEY` and `TCB_ENV_ID`; it does not use CAM `SecretId`/`SecretKey`
+credentials. The current deployment environment is
+`english-teaching-d2efj867d048d06`, and its server API Key expires at
+2026-08-28 00:15:31 (CloudBase console time).
 
 Automatic synchronization is accepted only after a later documentation-only
 push creates and serves a new CloudBase version whose `deployment-meta.json`

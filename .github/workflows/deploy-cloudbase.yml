@@ -1,4 +1,4 @@
-name: Deploy Emily learner mirror
+name: Deploy learner portal to CloudBase
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: emily-cloudbase-production
+  group: english-teaching-cloudbase-production
   cancel-in-progress: false
 
 jobs:
@@ -28,6 +28,8 @@ jobs:
 
       - name: Build learner-only mirror
         run: npm run build:cloudbase
+        env:
+          CLOUDBASE_BASE_PATH: /
 
       - name: Reject forbidden learner routes
         run: |
@@ -53,15 +55,17 @@ jobs:
 
       - name: Deploy a new learner-only application version
         run: >-
-          tcb app deploy emily-ib-learning-git
+          tcb app deploy english-teaching-portal
           --env-id "${{ secrets.TCB_ENV_ID }}"
           --framework static
           --install-command "npm install"
           --build-command "npm run build:cloudbase"
           --output-dir "./cloudbase-dist"
-          --deploy-path "/emily-ib-learning"
+          --deploy-path "/"
           --force
           --json
+        env:
+          CLOUDBASE_BASE_PATH: /
 
       - name: Verify served commit
         run: |

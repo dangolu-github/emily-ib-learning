@@ -16,7 +16,11 @@ const execFileAsync = promisify(execFile);
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..");
 const outputDirectory = path.join(repositoryRoot, "cloudbase-dist");
-const mirrorBasePath = "/emily-ib-learning";
+const requestedMirrorBasePath = process.env.CLOUDBASE_BASE_PATH ?? "/";
+const mirrorBasePath =
+  requestedMirrorBasePath === "/"
+    ? ""
+    : `/${requestedMirrorBasePath.replace(/^\/+|\/+$/g, "")}`;
 
 const learnerFiles = [
   "index.html",
@@ -122,6 +126,10 @@ async function sourceCommit() {
 }
 
 async function rewriteRootRelativeHtml() {
+  if (!mirrorBasePath) {
+    return;
+  }
+
   const outputFiles = await listFiles(outputDirectory);
 
   for (const file of outputFiles.filter((entry) => entry.endsWith(".html"))) {
