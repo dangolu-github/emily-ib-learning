@@ -9,3 +9,15 @@ The public repository contains class pages and handouts only. Student answers, d
 - Public: GitHub Pages source in this repository.
 - Private: Google Apps Script service and teacher dashboard.
 - Evidence: publication does not prove homework completion, checking, revision, or mastery.
+
+## Temporary mainland mirror
+
+GitHub `main` remains canonical. `npm run build:cloudbase` creates
+`cloudbase-dist/` from an explicit learner-only allowlist. It excludes the
+teacher route, Edge Functions, repository operations, planning files, private
+records, and backend source.
+
+GitHub Actions deploys only this build to the isolated
+`/emily-ib-learning/` path of the temporary Tencent CloudBase mirror. The
+workflow verifies `deployment-meta.json` against the pushed commit before
+reporting success. Tencent credentials remain in GitHub repository secrets.

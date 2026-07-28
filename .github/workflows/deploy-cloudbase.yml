@@ -1,0 +1,60 @@
+name: Deploy Emily learner mirror
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: emily-cloudbase-production
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out canonical source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build learner-only mirror
+        run: npm run build:cloudbase
+
+      - name: Reject forbidden learner routes
+        run: |
+          test ! -e cloudbase-dist/teacher
+          test ! -e cloudbase-dist/edge-functions
+          test ! -e cloudbase-dist/.git
+          test ! -e cloudbase-dist/.planning
+          test ! -e cloudbase-dist/private
+          test ! -e cloudbase-dist/scripts
+
+      - name: Install CloudBase CLI
+        run: npm install --global @cloudbase/cli@3.6.4
+
+      - name: Authenticate dedicated deploy identity
+        run: tcb login --apiKeyId "$TCB_SECRET_ID" --apiKey "$TCB_SECRET_KEY"
+        env:
+          TCB_SECRET_ID: ${{ secrets.TCB_SECRET_ID }}
+          TCB_SECRET_KEY: ${{ secrets.TCB_SECRET_KEY }}
+
+      - name: Deploy learner-only mirror
+        run: tcb hosting deploy cloudbase-dist emily-ib-learning -e "$TCB_ENV_ID" --concurrency 5 --retry-count 3
+        env:
+          TCB_ENV_ID: ${{ secrets.TCB_ENV_ID }}
+
+      - name: Verify served commit
+        run: |
+          test -n "$TCB_PUBLIC_URL"
+          served_commit="$(curl --fail --silent --show-error "${TCB_PUBLIC_URL%/}/deployment-meta.json" | node -pe 'JSON.parse(require("fs").readFileSync(0, "utf8")).sourceCommit')"
+          test "$served_commit" = "$GITHUB_SHA"
+        env:
+          TCB_PUBLIC_URL: ${{ vars.TCB_PUBLIC_URL }}
