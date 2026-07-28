@@ -31,3 +31,15 @@ credentials. The current deployment environment is
 Automatic synchronization is accepted only after a later documentation-only
 push creates and serves a new CloudBase version whose `deployment-meta.json`
 matches that pushed commit.
+
+## Neutral environment verification
+
+- Learner URL:
+  `https://english-teaching-d2efj867d048d06-1308268428.tcloudbaseapp.com/`
+- The root learner page, `crystal` access check, class pages, and the relay
+  allowlist for homework draft/submission actions were verified on 2026-07-29.
+- `/teacher/`, `/private/`, `/edge-functions/`, `/scripts/`, `/.git/`, and
+  `/README.md` returned 404 from the learner hostname.
+- EXPERTE.com reported the learner URL as not blocked from its Shanghai,
+  Beijing, and Shenzhen nodes on 2026-07-29. This is a technical network check;
+  Emily's real device/network acceptance remains required.
