@@ -97,6 +97,23 @@ async function listFiles(directory, prefix = "") {
 }
 
 async function sourceCommit() {
+  if (process.env.GITHUB_SHA) {
+    return process.env.GITHUB_SHA;
+  }
+
+  try {
+    return (
+      await readFile(
+        path.join(repositoryRoot, ".cloudbase-source-commit"),
+        "utf8",
+      )
+    ).trim();
+  } catch (error) {
+    if (error?.code !== "ENOENT") {
+      throw error;
+    }
+  }
+
   const { stdout } = await execFileAsync("git", ["rev-parse", "HEAD"], {
     cwd: repositoryRoot,
     encoding: "utf8",

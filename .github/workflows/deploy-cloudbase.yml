@@ -48,6 +48,9 @@ jobs:
           --env-id "${{ secrets.TCB_ENV_ID }}"
           --json
 
+      - name: Pin the source commit for the CloudBase build
+        run: printf '%s\n' "$GITHUB_SHA" > .cloudbase-source-commit
+
       - name: Deploy a new learner-only application version
         run: >-
           tcb app deploy emily-ib-learning-git

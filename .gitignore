@@ -2,3 +2,4 @@
 *.log
 .playwright/
 cloudbase-dist/
+.cloudbase-source-commit
