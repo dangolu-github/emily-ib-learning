@@ -8,6 +8,34 @@
     return element;
   }
 
+  function labeledLine(className, label, text) {
+    const line = document.createElement("p");
+    line.className = className;
+    const tag = document.createElement("span");
+    tag.textContent = label;
+    line.append(tag, document.createTextNode(text));
+    return line;
+  }
+
+  function renderTemplate(template, container) {
+    const wrap = document.createElement("section");
+    wrap.className = "homework-template";
+    if (template.intro) wrap.append(textElement("p", "template-intro", template.intro));
+    template.steps.forEach((step) => {
+      const row = document.createElement("article");
+      row.className = "template-step";
+      row.append(textElement("span", "template-label", step.label));
+      const fields = document.createElement("div");
+      fields.className = "template-fields";
+      fields.append(textElement("p", "template-lead", step.leadIn));
+      if (step.keyWords) fields.append(labeledLine("template-keys", "Key words", step.keyWords));
+      if (step.hint) fields.append(labeledLine("template-hint", "Hint", step.hint));
+      row.append(fields);
+      wrap.append(row);
+    });
+    container.append(wrap);
+  }
+
   function renderHomework(homework, container) {
     if (!homework) {
       container.append(
@@ -18,6 +46,7 @@
 
     container.append(textElement("h3", "", homework.title));
     container.append(textElement("p", "", homework.prompt));
+    if (homework.template) renderTemplate(homework.template, container);
     const list = document.createElement("ul");
     list.className = "homework-checklist";
     homework.checklist.forEach((item) => list.append(textElement("li", "", item)));

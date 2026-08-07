@@ -105,6 +105,55 @@ window.EMILY_CLASSES = [
     title: "Analytical Paragraph: Sentence-by-Sentence Revision",
     handoutTitle: "Rebuilding the Analytical Paragraph",
     handoutUrl: "2026-08-01-analytical-paragraph-revision.html",
+    homework: {
+      assignmentId: "emily-ib-2026-08-01-frame-rewrite",
+      title: "Rewrite the paragraph with the sentence frames",
+      prompt:
+        "Rewrite the paragraph 2 analysis in your own words, one frame at a time. Write first; open the revised paragraph on the handout only when you want to compare.",
+      template: {
+        intro: "Build one sentence from each frame, in order.",
+        steps: [
+          {
+            label: "Point",
+            leadIn: "Márquez begins his speech with…",
+            keyWords: "Latin American history · reality · fantastical",
+            hint: "One claim only. End the sentence before a second idea arrives.",
+          },
+          {
+            label: "Evidence",
+            leadIn: "This is evident in the metaphor “…”, which connects…",
+            keyWords: "seeds of our present-day novels · contemporary literature · Pigafetta’s book",
+            hint: "Quote word for word, and keep the two connected things parallel.",
+          },
+          {
+            label: "Technique",
+            leadIn: "Through the metaphorical expression “…”, Márquez suggests that…",
+            keyWords: "meta-literary · passed down · generations",
+            hint: "Name who is doing the suggesting, and check the s on suggests.",
+          },
+          {
+            label: "Analysis",
+            leadIn: "By combining…, the author creates…  He explains why…",
+            keyWords: "shared experience · outsiders · misread",
+            hint: "Two sentences, one job each: what the technique builds, then what it explains.",
+          },
+          {
+            label: "Link",
+            leadIn: "Therefore, Márquez uses…",
+            keyWords: "meta-literary metaphor · connect · distinctive",
+            hint: "Return to your point. No new ideas here.",
+          },
+        ],
+      },
+      checklist: [
+        "Every frame became one complete sentence with its own main verb.",
+        "Read each sentence aloud once before submitting.",
+        "Check the small forms: suggests, passed, fantastical, capitals on Latin American.",
+      ],
+      responseLabel: "Your rewritten paragraph",
+      responsePlaceholder: "Write the paragraph here…",
+      maxLength: 12000,
+    },
     review: {
       groups: [
         {
@@ -128,7 +177,7 @@ window.EMILY_CLASSES = [
           title: "Next steps",
           items: [
             "Read the sentence-by-sentence handout, then the full revised paragraph at its end.",
-            "Submit the revised paragraph through the Class 7 homework window.",
+            "Complete the sentence-frame rewrite in the Homework section and submit it there.",
           ],
         },
       ],
