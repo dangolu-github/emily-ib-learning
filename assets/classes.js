@@ -98,4 +98,40 @@ window.EMILY_CLASSES = [
       ],
     },
   },
+  {
+    number: 8,
+    date: "2026-08-01",
+    displayDate: "1 August 2026",
+    title: "Analytical Paragraph: Sentence-by-Sentence Revision",
+    handoutTitle: "Rebuilding the Analytical Paragraph",
+    handoutUrl: "2026-08-01-analytical-paragraph-revision.html",
+    review: {
+      groups: [
+        {
+          title: "Class content",
+          items: [
+            "We rebuilt the analytical paragraph on speech paragraph 2 one sentence at a time, from topic sentence to link.",
+            "Each sentence got the same test: find the subject, find the main verb, then let the claim land.",
+            "We checked wording against the speech text: the seed metaphor sits inside Pigafetta’s book, and the Chronicles of the Indies follow as a separate example.",
+          ],
+        },
+        {
+          title: "Writing focus",
+          items: [
+            "Read each sentence aloud after writing it; split it wherever the verb arrives late.",
+            "Watch agreement and word forms: which suggests, not suggest; passed, not past.",
+            "Use the precise terms: contemporary literature, fantastical, meta-literary reference.",
+            "Develop one idea per sentence; a new theme needs its own evidence.",
+          ],
+        },
+        {
+          title: "Next steps",
+          items: [
+            "Read the sentence-by-sentence handout, then the full revised paragraph at its end.",
+            "Submit the revised paragraph through the Class 7 homework window.",
+          ],
+        },
+      ],
+    },
+  },
 ];

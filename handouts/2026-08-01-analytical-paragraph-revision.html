@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sentence-by-sentence revision of the analytical paragraph on paragraph 2 of Gabriel García Márquez's Nobel lecture">
+  <title>Rebuilding the Analytical Paragraph · Márquez Speech</title>
+  <style>
+    :root {
+      --page: #f4f6fa;
+      --surface: #ffffff;
+      --ink: #182033;
+      --muted: #606b80;
+      --line: #d7deea;
+      --accent: #3157a5;
+      --accent-soft: #eaf0ff;
+      --note: #f7f9fd;
+      --draft-line: #b9c2d4;
+      --revision-line: #2e7d5b;
+      --revision-soft: #edf7f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100dvh;
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      width: min(980px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 3rem 0 5rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .course {
+      margin: 0 0 0.5rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 650;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .lede {
+      max-width: 760px;
+      margin: 1rem 0 0;
+      color: var(--muted);
+    }
+
+    .print-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .print-button:hover,
+    .print-button:focus-visible {
+      background: var(--accent-soft);
+    }
+
+    main {
+      display: grid;
+      gap: 2.75rem;
+      padding-top: 2.5rem;
+    }
+
+    section {
+      display: grid;
+      gap: 1rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 650;
+    }
+
+    .section-note {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .draft-full {
+      margin: 0;
+      padding: 1.35rem 1.5rem;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--draft-line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .draft-full p {
+      margin: 0 0 0.9rem;
+    }
+
+    .draft-full p:last-child {
+      margin-bottom: 0;
+    }
+
+    .stranded {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .sentence {
+      padding: 1.4rem 1.5rem 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .sentence > header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .role {
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid #bfcbea;
+      color: #24437f;
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .compare {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .version {
+      margin: 0;
+      padding: 0.9rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .version .tag {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .version.draft {
+      border-left: 4px solid var(--draft-line);
+      background: var(--note);
+    }
+
+    .version.revision {
+      border-left: 4px solid var(--revision-line);
+      background: var(--revision-soft);
+    }
+
+    .version.revision .tag {
+      color: var(--revision-line);
+    }
+
+    .why {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .why p {
+      margin: 0;
+      max-width: 72ch;
+    }
+
+    .patterns-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .pattern {
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      display: grid;
+      gap: 0.6rem;
+      align-content: start;
+    }
+
+    .pattern p {
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    caption {
+      text-align: left;
+      padding-bottom: 0.4rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    th, td {
+      padding: 0.45rem 0.6rem;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--note);
+      font-weight: 650;
+    }
+
+    .final-paragraph {
+      padding: 1.5rem 1.6rem;
+      border: 1px solid var(--revision-line);
+      border-left: 5px solid var(--revision-line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .final-paragraph p {
+      margin: 0;
+      max-width: 74ch;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .next-route {
+      padding: 1.35rem;
+      border-left: 4px solid var(--accent);
+      background: var(--note);
+    }
+
+    .next-route h2 {
+      margin-bottom: 0.8rem;
+    }
+
+    ul, ol {
+      display: grid;
+      gap: 0.65rem;
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    li::marker {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 1.2rem, 980px);
+        padding-top: 1.5rem;
+      }
+
+      .topbar {
+        display: grid;
+      }
+
+      .print-button {
+        justify-self: start;
+      }
+
+      .patterns-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        width: 100%;
+        padding: 0;
+      }
+
+      .print-button {
+        display: none;
+      }
+
+      .sentence,
+      .pattern,
+      .final-paragraph {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <p class="course">Gabriel García Márquez · Nobel Lecture</p>
+        <h1>Rebuilding the Analytical Paragraph</h1>
+        <p class="lede">In class on 1 August we went through the analytical paragraph on paragraph 2 of the speech, one sentence at a time. This page keeps that work. Each block shows the draft sentence, the rebuilt version, and the reason for every change. The complete revised paragraph sits at the end.</p>
+      </div>
+      <button class="print-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+    </header>
+
+    <main>
+      <section aria-labelledby="draft-title">
+        <h2 id="draft-title">The draft in full</h2>
+        <p class="section-note">Transcribed exactly as written, spelling and all, so the notes below can point at exact words.</p>
+        <blockquote class="draft-full">
+          <p>In Marquez's speech where latin american history begain with stories of a unique writing technique that a reality is told through a fantasy. This is evident in &ldquo;the seeds of our present-day novels&rdquo; reconnects both the present writing style of latin american authors but also to authors from the past escpecially the &lsquo;Chonicles of the Indies&rsquo;. This is demonstrated through a meta-literacy metaphor which suggest that this writing technique isn't new but rather a technique thats been past through generations created by latin americans. Through combining the past with the current as well as a reality thats so fantasy like creates a unique community that only latin americans understand, the author tries to explain this speical relationship that can only be understoon by the latin american audience of this unique writing style of a reality that seems impossible that is told through a fantastical stories, reinforcing the unique bond between their stories as well as the suffering of the latin american people. Therefore, Marquez uses a meta-literacy metaphor to associate the present authors to the past through writing styles distinctive to latin americans.</p>
+          <p class="stranded">builds a close-knit relationship with latin american audience where he</p>
+        </blockquote>
+      </section>
+
+      <section aria-labelledby="sentences-title">
+        <h2 id="sentences-title">Sentence by sentence</h2>
+
+        <article class="sentence">
+          <header>
+            <span class="role">Point</span>
+            <h3>Sentence 1 · the topic sentence</h3>
+          </header>
+          <div class="compare">
+            <blockquote class="version draft">
+              <span class="tag">Draft</span>
+              In Marquez's speech where latin american history begain with stories of a unique writing technique that a reality is told through a fantasy.
+            </blockquote>
+            <blockquote class="version revision">
+              <span class="tag">Revision</span>
+              Márquez begins his speech with real accounts from Latin American history in which reality appears fantastical.
+            </blockquote>
+          </div>
+          <div class="why">
+            <p>The draft sentence never lands. It opens a frame with &ldquo;In Marquez's speech&rdquo;, adds a where-clause, and ends before any main verb arrives, so the reader waits for a claim that never comes. A topic sentence has one job: state what the paragraph will prove. Start from the subject and let it act. Márquez begins.</p>
+            <p>Two smaller fixes ride along: began, not begain, and Latin American takes capitals because it is a proper adjective.</p>
+          </div>
+        </article>
+
+        <article class="sentence">
+          <header>
+            <span class="role">Evidence</span>
+            <h3>Sentence 2 · the quotation</h3>
+          </header>
+          <div class="compare">
+            <blockquote class="version draft">
+              <span class="tag">Draft</span>
+              This is evident in &ldquo;the seeds of our present-day novels&rdquo; reconnects both the present writing style of latin american authors but also to authors from the past escpecially the &lsquo;Chonicles of the Indies&rsquo;.
+            </blockquote>
+            <blockquote class="version revision">
+              <span class="tag">Revision</span>
+              This is evident in the metaphor &ldquo;the seeds of our present-day novels&rdquo;, which connects contemporary Latin American literature with historical accounts from the past through Pigafetta's &ldquo;short and fascinating book&rdquo;.
+            </blockquote>
+          </div>
+          <div class="why">
+            <p>Two sentence frames are fused here. &ldquo;This is evident in [the quote]&rdquo; wants the quotation as its object; &ldquo;[the quote] reconnects both&hellip;&rdquo; wants it as a subject. It cannot be both, which is why the sentence feels like it restarts halfway through. The revision parks the quotation after &ldquo;the metaphor&rdquo; and lets one relative clause, &ldquo;which connects&rdquo;, carry the verb.</p>
+            <p>The pairing needs repair too. &ldquo;Both X but also Y&rdquo; crosses two patterns; write &ldquo;both X and Y&rdquo; or &ldquo;not only X but also Y&rdquo;, and give the halves matching shapes: contemporary literature on one side, historical accounts on the other.</p>
+            <p>One thing the class checked against the speech itself: the &ldquo;seeds&rdquo; sit inside Pigafetta's book, and the Chronicles of the Indies come afterwards as a further example. So the revision ties the quotation to the book it actually describes. Spelling against the source: especially, Chronicles.</p>
+          </div>
+        </article>
+
+        <article class="sentence">
+          <header>
+            <span class="role">Technique</span>
+            <h3>Sentence 3 · naming the device</h3>
+          </header>
+          <div class="compare">
+            <blockquote class="version draft">
+              <span class="tag">Draft</span>
+              This is demonstrated through a meta-literacy metaphor which suggest that this writing technique isn't new but rather a technique thats been past through generations created by latin americans.
+            </blockquote>
+            <blockquote class="version revision">
+              <span class="tag">Revision</span>
+              Through the metaphorical expression &ldquo;seed&rdquo;, Márquez suggests that this writing style is not new but has developed across generations to present Latin American cultures and history.
+            </blockquote>
+          </div>
+          <div class="why">
+            <p>Agreement first: which suggests, not which suggest. The revision goes further and gives the suggesting a subject, Márquez, so the sentence reads forward instead of hanging off the previous one.</p>
+            <p>Meta-literary, not meta-literacy. Meta-literacy is an information-skills term from library science. Meta-literary means literature talking about literature, which is what the seed image does, and it is the term in the class notes.</p>
+            <p>Then the verb pair that costs marks: passed, not past. Something is passed down through generations; past is the time word. In formal analysis, write is not and that has rather than isn't and thats.</p>
+          </div>
+        </article>
+
+        <article class="sentence">
+          <header>
+            <span class="role">Analysis</span>
+            <h3>Sentence 4 · the long one</h3>
+          </header>
+          <div class="compare">
+            <blockquote class="version draft">
+              <span class="tag">Draft</span>
+              Through combining the past with the current as well as a reality thats so fantasy like creates a unique community that only latin americans understand, the author tries to explain this speical relationship that can only be understoon by the latin american audience of this unique writing style of a reality that seems impossible that is told through a fantastical stories, reinforcing the unique bond between their stories as well as the suffering of the latin american people.
+            </blockquote>
+            <blockquote class="version revision">
+              <span class="tag">Revision</span>
+              Furthermore, by combining the past with the present and presenting reality through a fantasy-like approach, the author creates a shared experience in this unique community. He explains why outsiders misread Latin American history: a reality that seems impossible to them is simply what Latin Americans have lived.
+            </blockquote>
+          </div>
+          <div class="why">
+            <p>Seventy-eight words, one full stop. Four ideas are packed inside: the shared community, the outsider's view, the impossible reality, and, in the last six words, suffering. When everything arrives at once, nothing gets developed, and the grammar buckles. &ldquo;A reality that seems impossible that is told through a fantastical stories&rdquo; hangs two that-clauses off one noun and puts &ldquo;a&rdquo; before a plural.</p>
+            <p>The revision cuts it into two sentences with one job each: first what the technique builds, a shared experience; then what it explains, why outsiders misread this history.</p>
+            <p>Smaller repairs: special, understood, the present rather than &ldquo;the current&rdquo;, fantastical rather than &ldquo;fantasy like&rdquo;. &ldquo;Unique&rdquo; appears three times in the draft; the revision keeps one.</p>
+            <p>Suffering is real in this speech. But six words at the end of a long sentence cannot carry a new theme. If you want it in the paragraph, give it its own sentence and its own quotation; otherwise let it go, as the revision does.</p>
+          </div>
+        </article>
+
+        <article class="sentence">
+          <header>
+            <span class="role">Link</span>
+            <h3>Sentence 5 · closing the paragraph</h3>
+          </header>
+          <div class="compare">
+            <blockquote class="version draft">
+              <span class="tag">Draft</span>
+              Therefore, Marquez uses a meta-literacy metaphor to associate the present authors to the past through writing styles distinctive to latin americans.
+            </blockquote>
+            <blockquote class="version revision">
+              <span class="tag">Revision</span>
+              Therefore, Márquez uses this meta-literary metaphor to connect present-day Latin American authors with their past, through a writing style distinctive to Latin America.
+            </blockquote>
+          </div>
+          <div class="why">
+            <p>The strongest sentence in the draft: it returns to the point and names the technique, which is what a link sentence should do. Closing with &ldquo;Therefore&rdquo; was the right instinct.</p>
+            <p>The fixes are small: meta-literary again, &ldquo;connect with&rdquo; in place of &ldquo;associate to&rdquo;, and the capitals. Saying &ldquo;this meta-literary metaphor&rdquo; ties the link back to the seed image instead of naming the technique as if it were new information.</p>
+          </div>
+        </article>
+
+        <article class="sentence">
+          <header>
+            <span class="role">Leftover</span>
+            <h3>The stranded line on page two</h3>
+          </header>
+          <div class="compare">
+            <blockquote class="version draft">
+              <span class="tag">Draft</span>
+              builds a close-knit relationship with latin american audience where he
+            </blockquote>
+          </div>
+          <div class="why">
+            <p>This is a piece of an earlier draft that stayed behind when its sentence moved. Its idea, the close bond with the Latin American audience, already lives inside sentence 4. Delete lines like this before submitting. You catch them with one slow read from top to bottom.</p>
+          </div>
+        </article>
+      </section>
+
+      <section aria-labelledby="patterns-title">
+        <h2 id="patterns-title">Patterns to carry forward</h2>
+        <p class="section-note">The same four habits explain nearly every correction above. Fix these and the next paragraph starts clean.</p>
+        <div class="patterns-grid">
+          <article class="pattern">
+            <h3>Finish the sentence you started</h3>
+            <p>Three of the five sentences open with a frame, &ldquo;In the speech where&hellip;&rdquo; or &ldquo;Through combining&hellip;&rdquo;, that never reaches a main verb. Put the subject early and let it act. Then read the sentence aloud: if the verb still has not arrived when you need a breath, split the sentence.</p>
+          </article>
+          <article class="pattern">
+            <h3>Make the small forms agree</h3>
+            <p>Which suggests. Outsiders misread. A fantastical story, or fantastical stories, never &ldquo;a fantastical stories&rdquo;. Past is the time word; passed is the verb. These errors live in the last letters of words, so slow down there.</p>
+          </article>
+          <article class="pattern">
+            <h3>Choose the term over the phrase</h3>
+            <table>
+              <caption>Wording the revision upgraded</caption>
+              <thead>
+                <tr><th scope="col">Draft</th><th scope="col">Revision</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>the present writing style</td><td>contemporary literature</td></tr>
+                <tr><td>fantasy like</td><td>fantastical, or fantasy-like as a modifier</td></tr>
+                <tr><td>meta-literacy</td><td>meta-literary</td></tr>
+                <tr><td>past through generations</td><td>passed down through generations</td></tr>
+                <tr><td>the current</td><td>the present</td></tr>
+                <tr><td>isn't, thats</td><td>is not, that has</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="pattern">
+            <h3>Advance, do not circle</h3>
+            <p>&ldquo;Unique&rdquo; appears three times in the draft, and the community idea appears twice. Each sentence should add something the previous one did not: a new piece of evidence, or a consequence of the claim before it. A new theme, like suffering here, needs its own sentence and its own quotation or it reads as decoration.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="final-title">
+        <h2 id="final-title">The revised paragraph</h2>
+        <p class="section-note">The paragraph rebuilt in class, with the gaps filled. It keeps the class wording wherever that wording already existed.</p>
+        <div class="final-paragraph">
+          <p>Márquez begins his speech with real accounts from Latin American history in which reality appears fantastical. This is evident in the metaphor &ldquo;the seeds of our present-day novels&rdquo;, which connects contemporary Latin American literature with historical accounts from the past through Pigafetta's &ldquo;short and fascinating book&rdquo;. Through the metaphorical expression &ldquo;seed&rdquo;, Márquez suggests that this writing style is not new but has developed across generations to present Latin American cultures and history. Furthermore, by combining the past with the present and presenting reality through a fantasy-like approach, the author creates a shared experience in this unique community. He explains why outsiders misread Latin American history: a reality that seems impossible to them is simply what Latin Americans have lived. Therefore, Márquez uses this meta-literary metaphor to connect present-day Latin American authors with their past, through a writing style distinctive to Latin America.</p>
+        </div>
+      </section>
+
+      <section class="next-route" aria-labelledby="next-title">
+        <h2 id="next-title">For the next paragraph</h2>
+        <ol>
+          <li>Write the topic sentence as one short claim you could defend aloud.</li>
+          <li>Quote before you interpret, and check the quotation against the text word for word.</li>
+          <li>Name the technique with the class term, then explain its effect.</li>
+          <li>After drafting, read each sentence aloud once and fix what you catch before you submit.</li>
+        </ol>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
