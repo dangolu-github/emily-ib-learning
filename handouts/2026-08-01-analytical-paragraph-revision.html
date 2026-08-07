@@ -139,17 +139,17 @@
 
     .draft-full {
       margin: 0;
-      padding: 1.35rem 1.5rem;
+      padding: 1.45rem 1.5rem;
       border: 1px solid var(--line);
       border-left: 4px solid var(--draft-line);
       border-radius: 10px;
       background: var(--surface);
       font-size: 1.02rem;
-      line-height: 1.85;
+      line-height: 2.15;
     }
 
     .draft-full p {
-      margin: 0 0 0.9rem;
+      margin: 0 0 1.1rem;
     }
 
     .draft-full p:last-child {
@@ -157,28 +157,71 @@
     }
 
     .stranded {
-      color: var(--muted);
       font-style: italic;
+    }
+
+    .sent-p { --sent-ink: #24437f; --sent-line: #b4c4ea; --sent-soft: #eef3fe; --sent-strong: #dfe9fd; }
+    .sent-e { --sent-ink: #1d5c42; --sent-line: #a6d2c0; --sent-soft: #eaf6f0; --sent-strong: #d7efe3; }
+    .sent-t { --sent-ink: #7a4b00; --sent-line: #e6c98f; --sent-soft: #fdf4e3; --sent-strong: #f8e9cb; }
+    .sent-a { --sent-ink: #6d3a80; --sent-line: #d8bce3; --sent-soft: #f7effa; --sent-strong: #efdff6; }
+    .sent-l { --sent-ink: #8c3a41; --sent-line: #e7b6ba; --sent-soft: #fdeef0; --sent-strong: #f9dce0; }
+    .sent-x { --sent-ink: #5a6472; --sent-line: #c9d0da; --sent-soft: #f2f4f7; --sent-strong: #e6eaef; }
+
+    .mark {
+      display: inline-block;
+      min-width: 1.3em;
+      padding: 0.05em 0.3em;
+      border-radius: 5px;
+      font-size: 0.72em;
+      font-weight: 700;
+      font-style: normal;
+      text-align: center;
+      color: #fff;
+      background: var(--sent-ink, #44506a);
+      vertical-align: 0.12em;
+    }
+
+    .petal-legend {
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .petal-legend .mark {
+      margin-right: 0.32rem;
     }
 
     a.sent {
       color: inherit;
       text-decoration: none;
-      border-bottom: 2px dotted var(--accent);
+      background: var(--sent-soft);
+      border: 1px solid var(--sent-line);
+      border-radius: 7px;
+      padding: 0.16em 0.45em 0.18em;
       cursor: pointer;
-      border-radius: 2px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    a.sent .mark {
+      margin-right: 0.45em;
     }
 
     a.sent:hover,
     a.sent:focus-visible {
-      background: var(--accent-soft);
+      background: var(--sent-strong);
+      border-color: var(--sent-ink);
       outline: none;
     }
 
     a.sent[aria-current="true"] {
-      background: var(--accent-soft);
-      border-bottom-style: solid;
-      box-shadow: 0 0 0 3px var(--accent-soft);
+      background: var(--sent-strong);
+      border-color: var(--sent-ink);
+      box-shadow: inset 0 0 0 1px var(--sent-ink);
     }
 
     .panel {
@@ -449,8 +492,10 @@
         display: grid;
       }
 
-      a.sent {
-        border-bottom: none;
+      .mark {
+        color: #000;
+        background: none;
+        border: 1px solid #000;
       }
 
       .card,
@@ -479,14 +524,15 @@
     <main>
       <section aria-labelledby="draft-title">
         <h2 id="draft-title">The draft, sentence by sentence</h2>
+        <p class="petal-legend"><span><span class="mark sent-p">P</span>point</span> <span><span class="mark sent-e">E</span>evidence</span> <span><span class="mark sent-t">T</span>technique</span> <span><span class="mark sent-a">A</span>analysis</span> <span><span class="mark sent-l">L</span>link</span> <span><span class="mark sent-x">+</span>leftover line</span></p>
         <div class="workspace">
           <blockquote class="draft-full">
-            <p><a class="sent" href="#card-s1" data-card="card-s1">In Marquez's speech where latin american history begain with stories of a unique writing technique that a reality is told through a fantasy.</a>
-            <a class="sent" href="#card-s2" data-card="card-s2">This is evident in &ldquo;the seeds of our present-day novels&rdquo; reconnects both the present writing style of latin american authors but also to authors from the past escpecially the &lsquo;Chonicles of the Indies&rsquo;.</a>
-            <a class="sent" href="#card-s3" data-card="card-s3">This is demonstrated through a meta-literacy metaphor which suggest that this writing technique isn't new but rather a technique thats been past through generations created by latin americans.</a>
-            <a class="sent" href="#card-s4" data-card="card-s4">Through combining the past with the current as well as a reality thats so fantasy like creates a unique community that only latin americans understand, the author tries to explain this speical relationship that can only be understoon by the latin american audience of this unique writing style of a reality that seems impossible that is told through a fantastical stories, reinforcing the unique bond between their stories as well as the suffering of the latin american people.</a>
-            <a class="sent" href="#card-s5" data-card="card-s5">Therefore, Marquez uses a meta-literacy metaphor to associate the present authors to the past through writing styles distinctive to latin americans.</a></p>
-            <p class="stranded"><a class="sent" href="#card-s6" data-card="card-s6">builds a close-knit relationship with latin american audience where he</a></p>
+            <p><a class="sent sent-p" href="#card-s1" data-card="card-s1"><span class="mark" aria-hidden="true">P</span>In Marquez's speech where latin american history begain with stories of a unique writing technique that a reality is told through a fantasy.</a>
+            <a class="sent sent-e" href="#card-s2" data-card="card-s2"><span class="mark" aria-hidden="true">E</span>This is evident in &ldquo;the seeds of our present-day novels&rdquo; reconnects both the present writing style of latin american authors but also to authors from the past escpecially the &lsquo;Chonicles of the Indies&rsquo;.</a>
+            <a class="sent sent-t" href="#card-s3" data-card="card-s3"><span class="mark" aria-hidden="true">T</span>This is demonstrated through a meta-literacy metaphor which suggest that this writing technique isn't new but rather a technique thats been past through generations created by latin americans.</a>
+            <a class="sent sent-a" href="#card-s4" data-card="card-s4"><span class="mark" aria-hidden="true">A</span>Through combining the past with the current as well as a reality thats so fantasy like creates a unique community that only latin americans understand, the author tries to explain this speical relationship that can only be understoon by the latin american audience of this unique writing style of a reality that seems impossible that is told through a fantastical stories, reinforcing the unique bond between their stories as well as the suffering of the latin american people.</a>
+            <a class="sent sent-l" href="#card-s5" data-card="card-s5"><span class="mark" aria-hidden="true">L</span>Therefore, Marquez uses a meta-literacy metaphor to associate the present authors to the past through writing styles distinctive to latin americans.</a></p>
+            <p class="stranded"><a class="sent sent-x" href="#card-s6" data-card="card-s6"><span class="mark" aria-hidden="true">+</span>builds a close-knit relationship with latin american audience where he</a></p>
           </blockquote>
 
           <div class="panel-hint" id="panel-hint">
