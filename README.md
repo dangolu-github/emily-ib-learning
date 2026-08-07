@@ -36,7 +36,7 @@ matches that pushed commit.
 
 - Learner URL:
   `https://english-teaching-d2efj867d048d06-1308268428.tcloudbaseapp.com/`
-- The root learner page, `crystal` access check, class pages, and the relay
+- The root learner page, the learner access check, class pages, and the relay
   allowlist for homework draft/submission actions were verified on 2026-07-29.
 - `/teacher/`, `/private/`, `/edge-functions/`, `/scripts/`, `/.git/`, and
   `/README.md` returned 404 from the learner hostname.
