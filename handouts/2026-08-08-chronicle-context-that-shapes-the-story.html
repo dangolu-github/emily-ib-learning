@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chronicle of a Death Foretold - Context That Shapes the Story</title>
+  <style>
+    :root {
+      --ink: #20272c;
+      --muted: #5d686f;
+      --paper: #ffffff;
+      --soft: #f5f7f6;
+      --line: #d5dcda;
+      --teal: #176b68;
+      --teal-soft: #e4f1ef;
+      --brick: #9a3f35;
+      --brick-soft: #f7e9e6;
+      --gold: #a66e12;
+      --gold-soft: #fbf2dc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.52;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 34px 30px 54px;
+    }
+
+    header {
+      border-top: 8px solid var(--teal);
+      border-bottom: 2px solid var(--brick);
+      padding: 20px 0 18px;
+      margin-bottom: 24px;
+    }
+
+    .kicker {
+      color: var(--brick);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle { margin: 0; color: var(--muted); font-size: 16px; }
+
+    h2 {
+      margin: 30px 0 12px;
+      padding-bottom: 7px;
+      color: var(--teal);
+      border-bottom: 1px solid var(--line);
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    h3 { margin: 0 0 7px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 7px 0; }
+    ul, ol { margin: 8px 0; padding-left: 22px; }
+    li { margin: 5px 0; }
+
+    .focus-banner {
+      margin: 0 0 24px;
+      padding: 14px 17px;
+      background: var(--teal-soft);
+      border: 1px solid var(--teal);
+      border-left: 6px solid var(--teal);
+      border-radius: 6px;
+    }
+
+    .focus-banner p { margin: 0 0 6px; }
+    .focus-banner p:last-child { margin-bottom: 0; }
+
+    .focus-date {
+      color: var(--brick);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .focus-banner a {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    #context-section {
+      scroll-margin-top: 14px;
+      border: 2px solid var(--teal);
+      border-radius: 8px;
+      padding: 2px 18px 16px;
+      background: #fbfdfd;
+    }
+
+    .focus-chip {
+      display: inline-block;
+      margin-left: 9px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #fff;
+      background: var(--teal);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    .hw-option {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 5px 9px;
+      border: 1px solid #e6cf9a;
+      border-radius: 4px;
+      color: var(--gold);
+      background: var(--gold-soft);
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .hw-option:hover, .hw-option:focus { background: #f5e7c4; }
+
+    .big-idea {
+      margin: 14px 0;
+      padding: 16px 18px;
+      background: var(--gold-soft);
+      border-left: 6px solid var(--gold);
+      border-radius: 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      line-height: 1.38;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 13px 15px;
+      background: #fff;
+    }
+
+    .note.teal { border-top: 4px solid var(--teal); }
+    .note.brick { border-top: 4px solid var(--brick); }
+    .note.gold { border-top: 4px solid var(--gold); }
+
+    .cue {
+      display: inline-block;
+      margin-bottom: 7px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      color: var(--teal);
+      background: var(--teal-soft);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .annotation {
+      color: var(--brick);
+      font-weight: 700;
+    }
+
+    .genre-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .genre {
+      padding: 12px 14px;
+      background: var(--soft);
+      border-left: 4px solid var(--brick);
+      border-radius: 4px;
+    }
+
+    .genre strong { display: block; margin-bottom: 3px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+
+    th { color: #fff; background: var(--teal); text-align: left; }
+    tbody tr:nth-child(even) { background: var(--soft); }
+
+    .concepts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .concept {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .concept strong { color: var(--brick); }
+
+    .takeaways {
+      columns: 2;
+      column-gap: 34px;
+      padding: 15px 20px 15px 38px;
+      background: var(--brick-soft);
+      border: 1px solid #e8c8c2;
+      border-radius: 6px;
+    }
+
+    .takeaways li { break-inside: avoid; }
+
+    .bridge {
+      background: var(--gold-soft);
+      border: 1px solid #e6cf9a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+
+    .table-scroll { overflow-x: auto; margin: 12px 0 18px; }
+    .table-scroll table { min-width: 1180px; margin: 0; }
+
+    .small { color: var(--muted); font-size: 12.5px; }
+
+    @media (max-width: 820px) {
+      .page { padding: 22px 16px 38px; }
+      h1 { font-size: 31px; }
+      .grid-2, .grid-3, .genre-list, .concepts { grid-template-columns: 1fr; }
+      .takeaways { columns: 1; }
+      table { display: block; overflow-x: auto; }
+    }
+
+    @media print {
+      body { font-size: 10.5pt; }
+      .page { max-width: none; padding: 13mm; }
+      .note, .genre, .concept, .big-idea, table { break-inside: avoid; }
+      .table-scroll table { min-width: 100%; font-size: 8.5pt; }
+      h2, h3 { break-after: avoid; }
+      .focus-banner a.jump { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="kicker">IB English A · Literature Study · Learning Guide</div>
+      <h1>Chronicle of a Death Foretold</h1>
+      <p class="subtitle">Gabriel García Márquez · Background, genre, plot map, and first IB reading lenses</p>
+    </header>
+
+    <nav class="focus-banner" aria-label="Class focus">
+      <p class="focus-date">Class focus · 8 August 2026</p>
+      <p><strong>Section 4 · Context That Shapes the Story.</strong> This class worked through the six background forces in that section and how each one shapes what characters can see, say, and do.</p>
+      <p><a class="jump" href="#context-section">Jump to the class-focus section ↓</a> &nbsp;·&nbsp; <a href="../class/?date=2026-08-08">Homework: one guided analytical paragraph ↗</a></p>
+    </nav>
+
+    <section>
+      <h2>1. The Big Map</h2>
+      <div class="big-idea">
+        This is not mainly a mystery about <em>who</em> killed Santiago Nasar. It is an investigation into why a death known by almost everyone was not prevented.
+      </div>
+      <ul class="takeaways">
+        <li>The ending is revealed immediately.</li>
+        <li>Tension comes from delay, contradiction, and missed chances.</li>
+        <li>The narrator reconstructs the past from memories and records.</li>
+        <li>Public reputation often matters more than private truth.</li>
+        <li>Gender roles turn social expectations into pressure.</li>
+        <li>The whole town becomes part of the moral question.</li>
+        <li>“Fate” may describe the death, but it may also excuse inaction.</li>
+        <li>Form and structure shape how we judge responsibility.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Author Snapshot</h2>
+      <div class="grid-2">
+        <article class="note teal">
+          <span class="cue">Remember</span>
+          <h3>Gabriel García Márquez (1927–2014)</h3>
+          <ul>
+            <li>Colombian novelist, short-story writer, and journalist.</li>
+            <li>A major figure in the <strong>Latin American Boom</strong>.</li>
+            <li>Won the Nobel Prize in Literature in 1982.</li>
+            <li>Often explores memory, violence, solitude, power, and the unstable border between history and story.</li>
+          </ul>
+        </article>
+        <article class="note brick">
+          <span class="cue">Why it matters</span>
+          <h3>Journalist + storyteller</h3>
+          <ul>
+            <li>Márquez combines witness testimony, documents, rumor, and literary pattern.</li>
+            <li>The result <em>sounds</em> factual but never gives complete certainty.</li>
+          </ul>
+          <p class="annotation">Takeaway: evidence can be detailed without being fully reliable.</p>
+        </article>
+        <article class="note gold">
+          <span class="cue">Literary context</span>
+          <h3>The Latin American Boom</h3>
+          <ul>
+            <li>A period of major international attention to Latin American fiction in the 1960s and 1970s.</li>
+            <li>Associated with formal experimentation, political history, non-linear time, and challenges to narrow ideas of realism.</li>
+            <li>Márquez became one of its best-known writers.</li>
+          </ul>
+        </article>
+        <article class="note teal">
+          <span class="cue">Source context</span>
+          <h3>A real event transformed</h3>
+          <ul>
+            <li>The novella is loosely inspired by a 1951 Colombian honor killing known to Márquez.</li>
+            <li>It is not a neutral report: Márquez selects, rearranges, invents, and patterns material.</li>
+            <li>Fiction turns one event into a wider inquiry about truth, memory, and collective responsibility.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Genre: One Text, Several Traditions</h2>
+      <p>Do not force the novel into one genre. Its meaning comes partly from mixing and disrupting different forms.</p>
+      <div class="genre-list">
+        <div class="genre"><strong>Form: novella</strong>A short, concentrated narrative organized around one central event.</div>
+        <div class="genre"><strong>Form: chronicle / pseudo-report</strong>A reconstruction using testimony, documents, dates, and public memory.</div>
+        <div class="genre"><strong>Genre: inverted detective fiction</strong>The killers and victim are known; the deeper puzzle is communal failure.</div>
+        <div class="genre"><strong>Genre: social tragedy</strong>A preventable death begins to feel inevitable because people obey inherited roles.</div>
+        <div class="genre"><strong>Literary tendency: postmodernism</strong>The narrative questions whether one complete and authoritative version of the past can be recovered.</div>
+        <div class="genre"><strong>Mode/context: magical realism</strong>Dreams, omens, coincidences, and extraordinary realities may be narrated as part of ordinary life.</div>
+      </div>
+      <div class="grid-2" style="margin-top: 12px;">
+        <article class="note teal">
+          <span class="cue">Postmodernism</span>
+          <h3>Truth is reconstructed, not simply recovered</h3>
+          <ul>
+            <li>Time is fragmented and circular rather than presented in one stable sequence.</li>
+            <li>Witness accounts contradict one another.</li>
+            <li>Report, memory, rumor, legal record, and fiction are mixed.</li>
+            <li>The reader must judge evidence without receiving final certainty.</li>
+          </ul>
+          <p class="annotation">Why it matters: the form makes truth and responsibility part of the problem.</p>
+        </article>
+        <article class="note brick">
+          <span class="cue">Magical realism</span>
+          <h3>The extraordinary can belong to ordinary reality</h3>
+          <ul>
+            <li>Dreams, omens, coincidence, and unusual details are often narrated calmly.</li>
+            <li>The mode does not build a separate fantasy world with explained magical rules.</li>
+            <li>This novella is restrained and strongly documentary; not every strange event should be labeled magical realism.</li>
+          </ul>
+          <p class="annotation">Why it matters: the text leaves fate, belief, memory, and reality in productive tension.</p>
+        </article>
+      </div>
+      <div class="bridge"><strong>Remember the difference:</strong> postmodernism asks how stories construct truth; magical realism expands what a culture may treat as real. They can overlap, but they are not the same idea.</div>
+      <p class="annotation">Genre takeaway: Márquez borrows the promise of a factual report, then shows how difficult it is to recover one final truth.</p>
+    </section>
+
+    <section id="context-section">
+      <h2>4. Context That Shapes the Story <span class="focus-chip">Class focus · 8 Aug</span></h2>
+      <div class="grid-3">
+        <article class="note teal">
+          <h3>Honor culture</h3>
+          <ul>
+            <li>Family reputation is treated as a public possession.</li>
+            <li>Shame is believed to require a visible response.</li>
+            <li>Violence can be wrongly presented as duty.</li>
+          </ul>
+          <a class="hw-option" href="../class/?date=2026-08-08">Guided paragraph structure in Homework ↗</a>
+        </article>
+        <article class="note brick">
+          <h3>Gender codes</h3>
+          <ul>
+            <li>Female sexuality is strictly controlled.</li>
+            <li>Male sexuality is judged more permissively.</li>
+            <li>Masculinity is performed through pride and aggression.</li>
+          </ul>
+        </article>
+        <article class="note gold">
+          <h3>Religion and ritual</h3>
+          <ul>
+            <li>Catholic symbols and ceremonies shape public life.</li>
+            <li>The Bishop’s visit reveals distance between ritual and care.</li>
+            <li>Sacred ideals coexist with bodily violence.</li>
+          </ul>
+        </article>
+        <article class="note gold">
+          <h3>Small-town surveillance</h3>
+          <ul>
+            <li>News travels quickly through gossip.</li>
+            <li>Privacy is limited.</li>
+            <li>Shared knowledge still fails to produce shared action.</li>
+          </ul>
+        </article>
+        <article class="note teal">
+          <h3>Class and ethnicity</h3>
+          <ul>
+            <li>Wealth influences marriage, status, and authority.</li>
+            <li>Santiago’s Arab ancestry marks him as partly outside the community.</li>
+            <li>Social position affects who is believed and protected.</li>
+          </ul>
+          <a class="hw-option" href="../class/?date=2026-08-08">Guided paragraph structure in Homework ↗</a>
+        </article>
+        <article class="note brick">
+          <h3>Institutions</h3>
+          <ul>
+            <li>Church, law, police, and local leadership all appear.</li>
+            <li>Authority is present but ineffective.</li>
+            <li>Failure is collective as well as personal.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Plot in Five Movements</h2>
+      <table>
+        <thead>
+          <tr><th>Movement</th><th>What happens</th><th>What to notice</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1. The known death</strong></td><td>The narrator announces Santiago’s murder and reconstructs his final morning.</td><td>Foreknowledge, dreams, omens, disrupted chronology.</td></tr>
+          <tr><td><strong>2. The wedding and accusation</strong></td><td>Bayardo marries Angela, returns her to her family, and Angela names Santiago.</td><td>Marriage as exchange; reputation versus evidence.</td></tr>
+          <tr><td><strong>3. The announced plan</strong></td><td>Pedro and Pablo prepare openly to kill Santiago “for honor.”</td><td>Public performance, reluctance, and opportunities to intervene.</td></tr>
+          <tr><td><strong>4. The aftermath</strong></td><td>The town examines the body, the legal case, and the changed lives of Angela and Bayardo.</td><td>Grotesque violence, institutional failure, transformation.</td></tr>
+          <tr><td><strong>5. The final reconstruction</strong></td><td>The narrative returns to the last minutes and shows the murder in full.</td><td>Delay, dramatic irony, closed doors, and collective witnessing.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>6. Character Roles</h2>
+      <div class="grid-3">
+        <article class="note"><h3>Santiago Nasar</h3><p>Victim, accused man, privileged insider, and ethnic outsider. His guilt remains uncertain.</p></article>
+        <article class="note"><h3>Angela Vicario</h3><p>Controlled by family expectations, but later develops agency through memory and writing.</p></article>
+        <article class="note"><h3>Pedro + Pablo Vicario</h3><p>Killers who publicly perform an expected masculine duty and repeatedly create chances to be stopped.</p></article>
+        <article class="note"><h3>Bayardo San Román</h3><p>Wealthy outsider whose courtship turns marriage into display, status, and possession.</p></article>
+        <article class="note"><h3>The narrator</h3><p>Friend, witness, investigator, and storyteller who reconstructs events decades later.</p></article>
+        <article class="note"><h3>The town</h3><p>A collective character: observer, messenger, judge, bystander, and participant.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>7. The Seven IB Concepts</h2>
+      <div class="concepts">
+        <div class="concept"><strong>Identity</strong><br>People are defined by gender, family name, class, and reputation.</div>
+        <div class="concept"><strong>Culture</strong><br>Honor and religious customs shape what the town accepts as normal.</div>
+        <div class="concept"><strong>Creativity</strong><br>Márquez reshapes a real event through literary form and pattern.</div>
+        <div class="concept"><strong>Communication</strong><br>Warnings circulate widely, yet meaningful communication fails.</div>
+        <div class="concept"><strong>Perspective</strong><br>Witnesses remember differently; no account is complete.</div>
+        <div class="concept"><strong>Transformation</strong><br>Violence changes Angela, Bayardo, the twins, and the whole town.</div>
+        <div class="concept"><strong>Representation</strong><br>The murder is represented as rumor, ritual, report, memory, and bodily horror.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. First Analytical Ideas</h2>
+      <div class="grid-2">
+        <article class="note teal"><h3>Fate vs responsibility</h3><p>The death feels destined, but many people could have interrupted it.</p></article>
+        <article class="note brick"><h3>Public story vs private truth</h3><p>The community acts on a socially useful accusation rather than secure proof.</p></article>
+        <article class="note gold"><h3>Individual guilt vs collective guilt</h3><p>The twins kill Santiago, but the town’s smaller failures make the murder possible.</p></article>
+        <article class="note teal"><h3>Ritual vs humanity</h3><p>People protect ceremony, reputation, and social roles while failing to protect a life.</p></article>
+        <article class="note brick"><h3>Memory vs history</h3><p>The past survives through conflicting stories, not through a single objective record.</p></article>
+        <article class="note gold"><h3>Gender and power</h3><p>Men and women are constrained differently, but characters also negotiate and resist those roles.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>9. Where Our Analysis Will Go</h2>
+      <div class="bridge">
+        Later, each important quotation or plot moment will be studied through several connected angles. For now, learn the categories and begin noticing possible links.
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Quotation / plot moment</th><th>Character / story arc</th><th>Theme</th><th>Genre / literary context</th><th>Wider meaning</th><th>Literary strategy</th><th>Language / style</th><th>Linkage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The twins repeatedly announce their plan in public.</td>
+              <td>The twins perform masculine duty; the town develops as a collective character.</td>
+              <td>Honor, masculinity, responsibility, communication.</td>
+              <td>Social tragedy; honor culture; inverted detective fiction.</td>
+              <td>Public knowledge does not automatically produce ethical action.</td>
+              <td>Delayed chronology, multiple testimony, characterization through repeated action.</td>
+              <td>Dramatic irony, repetition, public declarations, fatalistic diction.</td>
+              <td>Warning chain; mayor; priest; closed door; later claims of fate.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="annotation">Linkage habit: move from “what happens” → “how Márquez presents it” → “what the presentation makes us understand.”</p>
+      <p class="small"><strong>Class 1 action:</strong> understand the eight categories. During early reading, collect only the plot moment, character/theme connection, and linkage. We will complete strategy, language, and wider meaning after the whole text is secure.</p>
+    </section>
+
+    <section>
+      <h2>10. Reading Takeaways</h2>
+      <ol>
+        <li>Track <strong>who knows what, when, and what they do</strong>.</li>
+        <li>Separate <strong>fact, rumor, memory, and interpretation</strong>.</li>
+        <li>Mark moments when a character follows or resists a social role.</li>
+        <li>Notice repeated images: birds, dreams, knives, blood, doors, letters, the body, and public spectacle.</li>
+        <li>Ask why the narrator reveals information in this order.</li>
+        <li>Keep testing this claim: <strong>the death is foretold, but not necessarily inevitable.</strong></li>
+      </ol>
+      <p class="small">Learner portfolio starter: create a warning chain with the columns Person · Knowledge · Source · Action · Failure · Meaning.</p>
+      <p class="small">Unit destination: 20-24 high-value evidence rows, with a core twelve that can be recalled and reorganized for future Paper 2 questions and IO exploration.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -183,4 +183,136 @@ window.EMILY_CLASSES = [
       ],
     },
   },
+  {
+    number: 9,
+    date: "2026-08-08",
+    displayDate: "8 August 2026",
+    title: "Chronicle of a Death Foretold: Context That Shapes the Story",
+    handoutTitle: "Chronicle of a Death Foretold · Context That Shapes the Story",
+    handoutUrl: "2026-08-08-chronicle-context-that-shapes-the-story.html",
+    homework: {
+      assignmentId: "emily-ib-2026-08-08-context-paragraph",
+      title: "Write one analytical paragraph: context that shapes the story",
+      prompt:
+        "Choose one topic from Section 4 of the handout, Context That Shapes the Story, and write one analytical paragraph on how Márquez uses it in the novella. The two structures below map out the honor culture and the class and ethnicity options. Pick one and build each frame into your own sentences, or follow the same step order for a different context topic.",
+      templates: [
+        {
+          heading: "Option 1 · Honor culture",
+          intro:
+            "One sentence per frame, in order. The ideas in each frame are starting points — choose one, extend it, or replace it with your own.",
+          steps: [
+            {
+              label: "Point",
+              leadIn: "In Chronicle of a Death Foretold, Márquez presents honor as…",
+              keyWords:
+                "family reputation as public possession · shame demands a visible response · violence dressed as duty",
+              hint: "Make one claim about what the honor code does to the town, then stop.",
+            },
+            {
+              label: "Evidence",
+              leadIn: "This is clear when…",
+              keyWords:
+                "the twins announce the killing openly “for honor” · Angela is returned to her family · the town watches and waits",
+              hint: "Choose one or two precise plot moments; quote word for word if you have the passage.",
+            },
+            {
+              label: "Technique",
+              leadIn: "Through…, Márquez…",
+              keyWords: "repetition of public declarations · dramatic irony · fatalistic diction",
+              hint: "Name the technique before you explain it. Keep the device and its effect separate.",
+            },
+            {
+              label: "Analysis",
+              leadIn: "This suggests…  As a result,…",
+              keyWords:
+                "private shame becomes public performance · duty replaces judgment · a preventable death starts to feel inevitable",
+              hint: "Two sentences: what the technique reveals about the honor code, then what it makes the reader see about the town.",
+            },
+            {
+              label: "Link",
+              leadIn: "Therefore, Márquez…",
+              keyWords: "collective responsibility · critique of the honor code",
+              hint: "Close by connecting honor back to why nobody stopped a murder everyone knew about.",
+            },
+          ],
+        },
+        {
+          heading: "Option 2 · Class and ethnicity",
+          intro:
+            "Same frames, different force. Use the ideas as openings and develop them in your own words.",
+          steps: [
+            {
+              label: "Point",
+              leadIn: "Márquez uses Santiago Nasar’s position in the town to show…",
+              keyWords:
+                "wealth buys status and authority · Arab ancestry marks Santiago as partly an outsider",
+              hint: "One claim about how social position decides who is believed and who is protected.",
+            },
+            {
+              label: "Evidence",
+              leadIn: "This is clear when…",
+              keyWords:
+                "Angela’s accusation is accepted without proof · Bayardo’s money makes the marriage happen · the widower’s house is bought for show",
+              hint: "Pick one or two moments and describe them precisely; add the exact quotation if you can.",
+            },
+            {
+              label: "Technique",
+              leadIn: "Through…, Márquez…",
+              keyWords:
+                "contrast between insider privilege and outsider vulnerability · conflicting testimony · characterization",
+              hint: "Name the device first; explain what it does afterwards.",
+            },
+            {
+              label: "Analysis",
+              leadIn: "This suggests…  As a result,…",
+              keyWords: "the accusation sticks to the outsider · status shields some and exposes others",
+              hint: "What does this pattern reveal about how the community decides guilt?",
+            },
+            {
+              label: "Link",
+              leadIn: "Therefore, Márquez…",
+              keyWords: "who is believed · who is protected · collective failure",
+              hint: "Connect class and ethnicity back to why the town let the death happen.",
+            },
+          ],
+        },
+      ],
+      checklist: [
+        "Name your chosen context topic in your first sentence.",
+        "Quotations, if you use them, match the text word for word.",
+        "Technique named first, analysis after. Do not blend them into one sentence.",
+        "Read each sentence aloud once before submitting.",
+      ],
+      responseLabel: "Your analytical paragraph",
+      responsePlaceholder: "Write the paragraph here…",
+      maxLength: 12000,
+    },
+    review: {
+      groups: [
+        {
+          title: "Class content",
+          items: [
+            "We continued the Chronicle of a Death Foretold concepts handout, this time working through Section 4: Context That Shapes the Story.",
+            "Six background forces run the town: honor culture, gender codes, religion and ritual, small-town surveillance, class and ethnicity, and institutions. Each one limits what characters can see, say, and do.",
+            "We kept returning to the novella’s frame: the death is announced at the start, so analysis asks why it was not prevented, not who did it.",
+          ],
+        },
+        {
+          title: "Writing focus",
+          items: [
+            "Name the technique first, then analyse it. “Repetition” is a device; what the repetition does to the reader is the analysis.",
+            "Every claim needs a specific plot moment or quotation behind it. A term on its own, like “honor culture”, is a label, not evidence.",
+            "Work in one chain: context force → precise moment → technique → what it makes us understand about the town.",
+          ],
+        },
+        {
+          title: "Next steps",
+          items: [
+            "Open the handout; the banner at the top jumps straight to the Context That Shapes the Story section.",
+            "Write your context paragraph in the Homework section below and submit it there. Structures are set out for honor culture and for class and ethnicity; another topic from the section works too if you follow the same steps.",
+          ],
+        },
+      ],
+    },
+  },
 ];

@@ -20,6 +20,7 @@
   function renderTemplate(template, container) {
     const wrap = document.createElement("section");
     wrap.className = "homework-template";
+    if (template.heading) wrap.append(textElement("h4", "template-heading", template.heading));
     if (template.intro) wrap.append(textElement("p", "template-intro", template.intro));
     template.steps.forEach((step) => {
       const row = document.createElement("article");
@@ -47,6 +48,9 @@
     container.append(textElement("h3", "", homework.title));
     container.append(textElement("p", "", homework.prompt));
     if (homework.template) renderTemplate(homework.template, container);
+    if (Array.isArray(homework.templates)) {
+      homework.templates.forEach((template) => renderTemplate(template, container));
+    }
     const list = document.createElement("ul");
     list.className = "homework-checklist";
     homework.checklist.forEach((item) => list.append(textElement("li", "", item)));
