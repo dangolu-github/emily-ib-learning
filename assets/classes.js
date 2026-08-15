@@ -322,5 +322,6 @@ window.EMILY_CLASSES = [
     title: "Chronicle of a Death Foretold: Chapter 1 Evidence Lab",
     handoutTitle: "Chronicle of a Death Foretold · Chapter 1 Evidence Lab",
     handoutUrl: "2026-08-15-chronicle-chapter-1-evidence-lab.html",
+    emptySectionMessages: false,
   },
 ];

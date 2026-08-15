@@ -37,11 +37,13 @@
     container.append(wrap);
   }
 
-  function renderHomework(homework, container) {
+  function renderHomework(homework, container, showEmptyMessage = true) {
     if (!homework) {
-      container.append(
-        textElement("p", "empty-state", "No homework was assigned on this class page."),
-      );
+      if (showEmptyMessage) {
+        container.append(
+          textElement("p", "empty-state", "No homework was assigned on this class page."),
+        );
+      }
       return;
     }
 
@@ -100,11 +102,13 @@
     window.dispatchEvent(new Event("emily-homework-ready"));
   }
 
-  function renderReview(review, container) {
+  function renderReview(review, container, showEmptyMessage = true) {
     if (!review) {
-      container.append(
-        textElement("p", "empty-state", "No post-class review has been released for this class."),
-      );
+      if (showEmptyMessage) {
+        container.append(
+          textElement("p", "empty-state", "No post-class review has been released for this class."),
+        );
+      }
       return;
     }
 
@@ -145,8 +149,9 @@
     document.querySelector("#handout-title").textContent = lesson.handoutTitle;
     document.querySelector("#handout-link").href = `../handouts/${lesson.handoutUrl}`;
 
-    renderHomework(lesson.homework, document.querySelector("#homework-content"));
-    renderReview(lesson.review, document.querySelector("#review-content"));
+    const showEmptyMessages = lesson.emptySectionMessages !== false;
+    renderHomework(lesson.homework, document.querySelector("#homework-content"), showEmptyMessages);
+    renderReview(lesson.review, document.querySelector("#review-content"), showEmptyMessages);
     materials.hidden = false;
   }
 
