@@ -10,19 +10,22 @@ The public repository contains class pages and handouts only. Student answers, d
 - Private: Google Apps Script service and teacher dashboard.
 - Evidence: publication does not prove homework completion, checking, revision, or mastery.
 
-## Temporary mainland mirror
+## Retired mainland mirror
 
-GitHub `main` remains canonical. `npm run build:cloudbase` creates
+GitHub `main` remains canonical. The temporary CloudBase learner mirror was
+retired from automatic deployment on 2026-08-15 after the learner returned to
+Australia. The retained `npm run build:cloudbase` command creates
 `cloudbase-dist/` from an explicit learner-only allowlist. It excludes the
 teacher route, Edge Functions, repository operations, planning files, private
 records, and backend source.
 
-GitHub Actions deploys only this build at the root of the neutral
-`english-teaching` CloudBase environment. Emily is the temporary learner
-content in that environment; the environment and application names do not
-contain a student identity. The workflow verifies `deployment-meta.json`
-against the pushed commit before reporting success. It uses a dedicated,
-environment-bound CloudBase server API Key stored only as GitHub Secrets
+The retained workflow is manual-only and should remain disabled unless the
+teacher deliberately reactivates mainland delivery. If reactivated, it can
+deploy only this build at the root of the neutral `english-teaching` CloudBase
+environment. The environment and application names do not contain a student
+identity. The workflow verifies `deployment-meta.json` against the pushed
+commit before reporting success. It uses a dedicated, environment-bound
+CloudBase server API Key stored only as GitHub Secrets
 `TCB_API_KEY` and `TCB_ENV_ID`; it does not use CAM `SecretId`/`SecretKey`
 credentials. The current deployment environment is
 `english-teaching-d2efj867d048d06`, and its server API Key expires at
@@ -32,7 +35,7 @@ Automatic synchronization is accepted only after a later documentation-only
 push creates and serves a new CloudBase version whose `deployment-meta.json`
 matches that pushed commit.
 
-## Neutral environment verification
+## Last neutral-environment verification
 
 - Learner URL:
   `https://english-teaching-d2efj867d048d06-1308268428.tcloudbaseapp.com/`

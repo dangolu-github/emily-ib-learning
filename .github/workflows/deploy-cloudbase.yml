@@ -1,9 +1,6 @@
 name: Deploy learner portal to CloudBase
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
