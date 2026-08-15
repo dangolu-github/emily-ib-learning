@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chapter 1 evidence lab for Chronicle of a Death Foretold">
+  <title>Chronicle of a Death Foretold · Chapter 1 Evidence Lab</title>
+  <style>
+    :root {
+      --ink: #20272c;
+      --muted: #5d686f;
+      --paper: #ffffff;
+      --soft: #f4f7f6;
+      --line: #d5dcda;
+      --teal: #176b68;
+      --teal-soft: #e4f1ef;
+      --brick: #963f36;
+      --brick-soft: #f7e9e6;
+      --gold: #9a6817;
+      --gold-soft: #fbf2dc;
+      --blue: #315f85;
+      --blue-soft: #e8f0f7;
+      --focus: #111827;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    button, summary { font: inherit; }
+    button:focus-visible, summary:focus-visible, a:focus-visible {
+      outline: 3px solid #f0b429;
+      outline-offset: 3px;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 28px 58px;
+    }
+
+    .hero {
+      border-top: 8px solid var(--teal);
+      border-bottom: 2px solid var(--brick);
+      padding: 20px 0 18px;
+      margin-bottom: 22px;
+    }
+
+    .kicker {
+      margin: 0 0 7px;
+      color: var(--brick);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { color: var(--ink); }
+    h1 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 5vw, 45px);
+      line-height: 1.08;
+    }
+
+    .subtitle { margin: 0; color: var(--muted); font-size: 17px; }
+    h2 {
+      margin: 34px 0 14px;
+      padding-bottom: 7px;
+      color: var(--teal);
+      border-bottom: 1px solid var(--line);
+      font-size: 23px;
+    }
+    h3 { margin: 0 0 7px; font-size: 17px; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0; padding-left: 23px; }
+    li { margin: 5px 0; }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 15px 0 0;
+    }
+
+    .action-button, .trace-button, .clear-button {
+      border: 1px solid var(--teal);
+      border-radius: 5px;
+      padding: 8px 11px;
+      color: var(--teal);
+      background: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .action-button:hover, .trace-button:hover, .clear-button:hover { background: var(--teal-soft); }
+
+    .contract, .big-idea, .worked-bridge, .application {
+      border-radius: 7px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .contract { border: 1px solid var(--teal); background: var(--teal-soft); }
+    .big-idea {
+      border-left: 6px solid var(--gold);
+      background: var(--gold-soft);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+    }
+    .worked-bridge { border: 1px solid #e4c984; background: var(--gold-soft); }
+    .application { border: 1px solid var(--line); background: var(--soft); }
+    .application.diagnostic { border-left: 6px solid var(--brick); background: var(--brick-soft); }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .card.teal { border-top: 4px solid var(--teal); }
+    .card.brick { border-top: 4px solid var(--brick); }
+    .card.gold { border-top: 4px solid var(--gold); }
+    .card.blue { border-top: 4px solid var(--blue); }
+
+    .label, .status {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 3px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .label { color: var(--teal); background: var(--teal-soft); }
+    .status.event { color: var(--teal); background: var(--teal-soft); }
+    .status.testimony { color: var(--blue); background: var(--blue-soft); }
+    .status.record { color: var(--gold); background: var(--gold-soft); }
+    .status.interpretation { color: var(--brick); background: var(--brick-soft); }
+
+    .status-key {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 11px;
+      vertical-align: top;
+    }
+    th { color: #fff; background: var(--teal); text-align: left; }
+    tbody tr:nth-child(even) { background: var(--soft); }
+    .table-scroll { overflow-x: auto; }
+
+    .beat-number {
+      display: inline-grid;
+      place-items: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--brick);
+      font-weight: 700;
+    }
+
+    details.evidence {
+      margin: 12px 0;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--teal);
+      border-radius: 7px;
+      background: #fff;
+      scroll-margin-top: 18px;
+      transition: box-shadow .2s ease, background .2s ease;
+    }
+    details.evidence.active {
+      background: #fff9e8;
+      box-shadow: 0 0 0 3px #f0b429;
+    }
+    details.evidence summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .evidence-body { padding: 0 16px 16px; }
+    .anchor {
+      margin: 10px 0;
+      padding: 11px 13px;
+      border-left: 4px solid var(--brick);
+      background: var(--brick-soft);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+    }
+    mark.fact { color: inherit; background: #bfe4df; }
+    mark.warning { color: inherit; background: #f0c4bd; }
+    mark.uncertain { color: inherit; background: #f1d99d; }
+
+    .field-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 10px;
+    }
+    .field {
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 10px 11px;
+      background: var(--soft);
+    }
+    .field strong { display: block; color: var(--brick); margin-bottom: 3px; }
+
+    .bridge-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 12px;
+    }
+    .bridge-step {
+      border-radius: 6px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid #e4c984;
+    }
+    .bridge-step strong { display: block; color: var(--brick); margin-bottom: 4px; }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .prompt {
+      min-height: 92px;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px dashed #9ba7a4;
+      border-radius: 5px;
+      background: #fff;
+    }
+    .prompt strong { color: var(--teal); }
+    .answer-line {
+      display: block;
+      width: 100%;
+      margin-top: 28px;
+      border-bottom: 1px solid #788581;
+    }
+
+    .return-link { display: inline-block; margin-top: 9px; color: var(--teal); font-weight: 700; }
+    .small { color: var(--muted); font-size: 12.5px; }
+    .takeaways {
+      padding: 15px 20px 15px 38px;
+      border: 1px solid #e8c8c2;
+      border-radius: 7px;
+      background: var(--brick-soft);
+    }
+
+    @media (max-width: 820px) {
+      .page { padding: 22px 16px 40px; }
+      .grid-2, .grid-3, .field-list, .bridge-steps, .prompt-grid { grid-template-columns: 1fr; }
+      table { min-width: 720px; }
+    }
+
+    @media print {
+      body { font-size: 10.5pt; }
+      .page { max-width: none; padding: 12mm; }
+      .top-actions, .trace-button, .clear-button { display: none !important; }
+      details.evidence { break-inside: avoid; }
+      details.evidence > * { display: block !important; }
+      details.evidence summary { color: #000; }
+      .grid-2, .grid-3, .field-list, .bridge-steps, .prompt-grid { break-inside: avoid; }
+      .table-scroll { overflow: visible; }
+      table { min-width: 0; font-size: 8.5pt; }
+      h2, h3 { break-after: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero" id="top">
+      <p class="kicker">IB English A · Literature Study · 15 August 2026</p>
+      <h1>Chronicle of a Death Foretold</h1>
+      <p class="subtitle">Chapter 1 · Foreknowledge, perspective, and failed warning</p>
+      <div class="top-actions">
+        <button class="action-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+        <button class="clear-button" type="button" id="clear-highlights">Clear evidence highlight</button>
+      </div>
+    </header>
+
+    <section class="contract" aria-labelledby="lesson-contract">
+      <h2 id="lesson-contract" style="margin-top:0">Lesson contract</h2>
+      <ul>
+        <li><strong>Text:</strong> Chapter 1, already read.</li>
+        <li><strong>Focus:</strong> secure exact plot details before expanding analysis.</li>
+        <li><strong>Reading job:</strong> separate what happens, how the event is known, and why its position matters.</li>
+        <li><strong>Class product:</strong> four reusable Evidence Nodes for the whole-novel analytical chart.</li>
+      </ul>
+    </section>
+
+    <div class="big-idea">
+      Chapter 1 does more than introduce a doomed victim. It makes the reader watch knowledge circulate, fail, and become uncertain.
+    </div>
+
+    <section aria-labelledby="method-title">
+      <h2 id="method-title">1. Evidence before interpretation</h2>
+      <p>Use four evidence-status labels. Status tells you how securely the novella lets us know something.</p>
+      <div class="status-key" aria-label="Evidence status key">
+        <span class="status event">Event</span>
+        <span class="status testimony">Later testimony</span>
+        <span class="status record">Record or document</span>
+        <span class="status interpretation">Interpretation</span>
+      </div>
+      <div class="grid-2">
+        <article class="card teal"><h3>Event</h3><p>An action the narrator presents as part of the reconstructed morning.</p></article>
+        <article class="card blue"><h3>Later testimony</h3><p>A witness remembers or explains the event years later. Memory may conflict with another account.</p></article>
+        <article class="card gold"><h3>Record or document</h3><p>A note, report, or official trace enters the reconstruction. A record can still be incomplete.</p></article>
+        <article class="card brick"><h3>Interpretation</h3><p>A meaning inferred from evidence. It must remain separate from the factual event.</p></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="beats-title" id="plot-map">
+      <h2 id="beats-title">2. Chapter 1 in seven causal beats</h2>
+      <p>Retell in this order. Use Trace buttons to open linked evidence.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Beat</th><th>What happens</th><th>Why next beat follows</th><th>Evidence</th></tr></thead>
+          <tbody>
+            <tr><td><span class="beat-number">1</span></td><td>Narrator announces Santiago’s death before reconstructing his morning.</td><td>Outcome is fixed; reader now investigates process and responsibility.</td><td><button class="trace-button" type="button" data-target="e1">Trace E1</button></td></tr>
+            <tr><td><span class="beat-number">2</span></td><td>Dream, weather, clothing, and remembered details make morning appear both ordinary and ominous.</td><td>Later knowledge changes how every ordinary detail is read.</td><td><button class="trace-button" type="button" data-target="e1">Trace E1</button></td></tr>
+            <tr><td><span class="beat-number">3</span></td><td>Kitchen scene connects animal bodies, household resentment, gendered power, and withheld warning.</td><td>Violence is present before murder, but its meaning is not yet stable.</td><td><button class="trace-button" type="button" data-target="e2">Trace E2</button></td></tr>
+            <tr><td><span class="beat-number">4</span></td><td>House layout, unusual front-door exit, and unseen warning note create a precise missed chance.</td><td>Information exists, but nobody converts it into protective action.</td><td><button class="trace-button" type="button" data-target="e3">Trace E3</button></td></tr>
+            <tr><td><span class="beat-number">5</span></td><td>Twins wait openly while Clotilde sees Santiago and briefly delays them.</td><td>Threat becomes public, yet intervention remains partial.</td><td><button class="trace-button" type="button" data-target="e4">Trace E4</button></td></tr>
+            <tr><td><span class="beat-number">6</span></td><td>Bishop passes without landing; town’s ritual excitement momentarily controls attention.</td><td>Public ceremony displaces urgent care for an individual.</td><td><button class="trace-button" type="button" data-target="e4">Trace E4</button></td></tr>
+            <tr><td><span class="beat-number">7</span></td><td>News spreads after bishop’s departure, but people assume Santiago must already know.</td><td>Shared knowledge becomes dispersed responsibility.</td><td><button class="trace-button" type="button" data-target="e4">Trace E4</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="time-title">
+      <h2 id="time-title">3. Two orders at once</h2>
+      <div class="grid-2">
+        <article class="card teal">
+          <span class="label">Narrative order</span>
+          <h3>Order in which reader receives information</h3>
+          <ol>
+            <li>Death announced.</li>
+            <li>Morning reconstructed.</li>
+            <li>Later interviews interrupt scene.</li>
+            <li>Future documents and consequences enter early.</li>
+          </ol>
+        </article>
+        <article class="card brick">
+          <span class="label">Story chronology</span>
+          <h3>Order in which events happened</h3>
+          <ol>
+            <li>Wedding and accusation occur earlier.</li>
+            <li>Threat circulates before dawn.</li>
+            <li>Santiago wakes and leaves home.</li>
+            <li>Town gathers for bishop while warnings continue.</li>
+          </ol>
+        </article>
+      </div>
+      <p class="small"><strong>Why it matters:</strong> reader knows outcome before Santiago does. This gap creates dramatic irony, but it also makes each missed action morally visible.</p>
+    </section>
+
+    <section aria-labelledby="evidence-title" id="evidence-bank">
+      <h2 id="evidence-title">4. Four Evidence Nodes</h2>
+      <p>Open each node. Green highlight marks event wording; red marks warning or power; gold marks uncertainty or interpretation.</p>
+
+      <details class="evidence" id="e1">
+        <summary>E1 · Opening announcement, dream, and contradictory memory</summary>
+        <div class="evidence-body">
+          <p class="anchor">“<mark class="fact">On the day</mark> they were going to <mark class="warning">kill him</mark>”</p>
+          <div class="status-key"><span class="status event">Event</span><span class="status testimony">Later testimony</span><span class="status interpretation">Interpretation</span></div>
+          <div class="field-list">
+            <div class="field"><strong>Precise moment</strong>Death is announced; dream and weather are reconstructed through later memories.</div>
+            <div class="field"><strong>Character / role</strong>Santiago is unaware inside a story whose outcome narrator already knows. Plácida becomes failed interpreter and grieving witness.</div>
+            <div class="field"><strong>Tension</strong>Fate versus responsibility; memory versus history.</div>
+            <div class="field"><strong>Linkage</strong>Return to final murder, bird imagery, later contradictory testimony, and circular ending.</div>
+          </div>
+          <a class="return-link" href="#plot-map">Return to causal map</a>
+        </div>
+      </details>
+
+      <details class="evidence" id="e2">
+        <summary>E2 · Rabbits, Divina Flor, and violence inside ordinary life</summary>
+        <div class="evidence-body">
+          <p class="anchor">“Make believe it was a <mark class="warning">human being</mark>.”</p>
+          <div class="status-key"><span class="status event">Event</span><span class="status testimony">Later testimony</span><span class="status interpretation">Interpretation</span></div>
+          <div class="field-list">
+            <div class="field"><strong>Precise moment</strong>Victoria dismembers rabbits; Santiago grabs Divina’s wrist, then reacts to animal suffering.</div>
+            <div class="field"><strong>Character / role</strong>Santiago is both future victim and privileged young man who exercises power. Victoria protects, resents, and withholds.</div>
+            <div class="field"><strong>Tension</strong>Humanity versus brutality; victimhood versus moral complexity; gender and class power.</div>
+            <div class="field"><strong>Linkage</strong>Knives, butchery, Santiago’s body, autopsy, and repeated animal imagery.</div>
+          </div>
+          <a class="return-link" href="#plot-map">Return to causal map</a>
+        </div>
+      </details>
+
+      <details class="evidence" id="e3">
+        <summary>E3 · Door system and unread warning note</summary>
+        <div class="evidence-body">
+          <p class="anchor">“<mark class="warning">The Fatal Door</mark>”</p>
+          <div class="status-key"><span class="status event">Event</span><span class="status record">Record or document</span><span class="status interpretation">Interpretation</span></div>
+          <div class="field-list">
+            <div class="field"><strong>Precise moment</strong>Santiago leaves through the less-used front door while a detailed warning lies unseen inside.</div>
+            <div class="field"><strong>Character / role</strong>Divina leaves door unbarred as limited protection; household fails to deliver information; investigator later labels door.</div>
+            <div class="field"><strong>Tension</strong>Chance versus choice; communication versus action.</div>
+            <div class="field"><strong>Linkage</strong>Final locked door, thresholds, warning chain, and later language of fatal coincidence.</div>
+          </div>
+          <a class="return-link" href="#plot-map">Return to causal map</a>
+        </div>
+      </details>
+
+      <details class="evidence" id="e4">
+        <summary>E4 · Bishop, Clotilde, and public ritual</summary>
+        <div class="evidence-body">
+          <p class="anchor">“the bishop <mark class="uncertain">didn’t get off</mark> his boat”</p>
+          <div class="status-key"><span class="status event">Event</span><span class="status testimony">Later testimony</span><span class="status interpretation">Interpretation</span></div>
+          <div class="field-list">
+            <div class="field"><strong>Precise moment</strong>Bishop blesses town from boat; Clotilde temporarily delays twins; urgent news remains secondary to ceremony.</div>
+            <div class="field"><strong>Character / role</strong>Clotilde becomes moral observer and partial intervener. Bishop represents distant institutional authority.</div>
+            <div class="field"><strong>Tension</strong>Ritual versus humanity; authority versus care; public knowledge versus ethical action.</div>
+            <div class="field"><strong>Linkage</strong>Priest, autopsy, sacred/profane contrast, town as collective character, institutional failure.</div>
+          </div>
+          <a class="return-link" href="#plot-map">Return to causal map</a>
+        </div>
+      </details>
+    </section>
+
+    <section aria-labelledby="roles-title">
+      <h2 id="roles-title">5. Character roles move</h2>
+      <div class="grid-3">
+        <article class="card teal"><h3>Santiago</h3><p><strong>Role:</strong> accused future victim and privileged insider.</p><p><strong>Pressure/choice:</strong> unaware of threat; repeats inherited gendered power toward Divina.</p><p><strong>Change:</strong> ordinary actions become evidence after death.</p></article>
+        <article class="card brick"><h3>Plácida</h3><p><strong>Role:</strong> mother and respected dream interpreter.</p><p><strong>Pressure/choice:</strong> reads dream as harmless.</p><p><strong>Change:</strong> later memory freezes her at moment of failed recognition.</p></article>
+        <article class="card gold"><h3>Victoria + Divina</h3><p><strong>Role:</strong> household witnesses under gender and class pressure.</p><p><strong>Pressure/choice:</strong> know danger but do not give direct warning.</p><p><strong>Change:</strong> later testimony complicates motive and responsibility.</p></article>
+        <article class="card blue"><h3>Clotilde</h3><p><strong>Role:</strong> shopkeeper, observer, early intervener.</p><p><strong>Pressure/choice:</strong> recognizes danger and delays twins, but cannot stop wider failure.</p><p><strong>Change:</strong> becomes moral contrast to passive town.</p></article>
+        <article class="card teal"><h3>Narrator</h3><p><strong>Role:</strong> friend, investigator, editor of memories.</p><p><strong>Pressure/choice:</strong> rebuilds event from incompatible sources.</p><p><strong>Change:</strong> produces meaning without complete certainty.</p></article>
+        <article class="card brick"><h3>Town</h3><p><strong>Role:</strong> audience, messenger network, and bystander.</p><p><strong>Pressure/choice:</strong> assumes someone else has warned Santiago.</p><p><strong>Change:</strong> setting begins to operate as collective character.</p></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="bridge-title">
+      <h2 id="bridge-title">6. Worked bridge: E3</h2>
+      <div class="worked-bridge">
+        <p><strong>Question:</strong> How does unseen warning note become more than plot information?</p>
+        <div class="bridge-steps">
+          <div class="bridge-step"><strong>1. Event</strong>Detailed warning exists, but remains unread as Santiago leaves.</div>
+          <div class="bridge-step"><strong>2. Pattern</strong>Information repeatedly fails to reach person who needs it.</div>
+          <div class="bridge-step"><strong>3. Authorial choice</strong>Dramatic irony and recurring door motif make missed protection visible.</div>
+          <div class="bridge-step"><strong>4. Meaning</strong>Knowledge alone has no ethical force; responsibility requires action.</div>
+        </div>
+      </div>
+      <p class="small">Keep two levels separate: <strong>door motif / dramatic irony</strong> name authorial choices; <strong>failed protection and inactive knowledge</strong> explain their meaning.</p>
+    </section>
+
+    <section aria-labelledby="guided-title">
+      <h2 id="guided-title">7. Guided Application: E1</h2>
+      <div class="application">
+        <p><strong>Build one four-field row from opening and dream.</strong></p>
+        <div class="prompt-grid">
+          <div class="prompt"><strong>Plot / evidence</strong><br>Which two precise Chapter 1 details will you use?</div>
+          <div class="prompt"><strong>Character / role</strong><br>How are Santiago, Plácida, or narrator positioned?</div>
+          <div class="prompt"><strong>Tension</strong><br>Which tension fits better: fate/responsibility or memory/history? Why?</div>
+          <div class="prompt"><strong>Linkage</strong><br>Where will this pattern return later?</div>
+        </div>
+        <details>
+          <summary><strong>Check one defensible route</strong></summary>
+          <p>Opening foreknowledge positions Santiago as unaware victim and narrator as retrospective investigator. Dream interpretation and conflicting weather memories connect fate/responsibility with memory/history. Pattern returns through later testimony and final murder reconstruction.</p>
+        </details>
+      </div>
+    </section>
+
+    <section aria-labelledby="diagnostic-title">
+      <h2 id="diagnostic-title">8. Diagnostic Application: E2</h2>
+      <div class="application diagnostic">
+        <p><strong>Answer without opening E2 again.</strong> Use kitchen scene to complete:</p>
+        <div class="prompt-grid">
+          <div class="prompt"><strong>Plot / evidence</strong><span class="answer-line" aria-hidden="true"></span></div>
+          <div class="prompt"><strong>Character / role</strong><span class="answer-line" aria-hidden="true"></span></div>
+          <div class="prompt"><strong>Tension</strong><span class="answer-line" aria-hidden="true"></span></div>
+          <div class="prompt"><strong>Linkage</strong><span class="answer-line" aria-hidden="true"></span></div>
+        </div>
+        <p class="small">Self-check: factual detail first; interpretation second. Do not treat Santiago’s victimhood as proof that every action is innocent.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="exit-title">
+      <h2 id="exit-title">9. Exit check</h2>
+      <ol class="takeaways">
+        <li>Retell Chapter 1 in 5–7 causal steps.</li>
+        <li>Name one event and one piece of later testimony.</li>
+        <li>Explain one genuine linkage between two Evidence Nodes.</li>
+        <li>Complete: “Chapter 1 makes the death feel foretold, but not inevitable, because…”</li>
+      </ol>
+      <p class="small">Next unit action: retain these four nodes. Later chapters will add evidence, not replace this map.</p>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const evidenceNodes = [...document.querySelectorAll("details.evidence")];
+      const clearButton = document.querySelector("#clear-highlights");
+      let lastTrigger = null;
+
+      function clearActive() {
+        evidenceNodes.forEach((node) => node.classList.remove("active"));
+      }
+
+      document.querySelectorAll("[data-target]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = document.getElementById(button.dataset.target);
+          if (!target) return;
+          lastTrigger = button;
+          clearActive();
+          target.open = true;
+          target.classList.add("active");
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          window.setTimeout(() => target.querySelector("summary")?.focus(), 350);
+        });
+      });
+
+      clearButton.addEventListener("click", () => {
+        clearActive();
+        lastTrigger?.focus();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        clearActive();
+        lastTrigger?.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
