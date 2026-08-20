@@ -146,8 +146,23 @@
     document.querySelector("#lesson-meta").textContent =
       `Class ${lesson.number} · ${lesson.displayDate}`;
     document.querySelector("#lesson-title").textContent = lesson.title;
-    document.querySelector("#handout-title").textContent = lesson.handoutTitle;
-    document.querySelector("#handout-link").href = `../handouts/${lesson.handoutUrl}`;
+    const handouts = Array.isArray(lesson.handouts) && lesson.handouts.length
+      ? lesson.handouts
+      : [{ title: lesson.handoutTitle, url: lesson.handoutUrl }];
+    const primaryHandout = document.querySelector("#handout-link");
+    document.querySelector("#handout-title").textContent = handouts[0].title;
+    primaryHandout.href = `../handouts/${handouts[0].url}`;
+    handouts.slice(1).forEach((handout) => {
+      const link = document.createElement("a");
+      link.className = "handout-link";
+      link.href = `../handouts/${handout.url}`;
+      link.append(
+        textElement("span", "", handout.title),
+        textElement("span", "", "↗"),
+      );
+      link.lastElementChild.setAttribute("aria-hidden", "true");
+      primaryHandout.after(link);
+    });
 
     const showEmptyMessages = lesson.emptySectionMessages !== false;
     renderHomework(lesson.homework, document.querySelector("#homework-content"), showEmptyMessages);

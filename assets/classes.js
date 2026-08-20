@@ -319,9 +319,19 @@ window.EMILY_CLASSES = [
     number: 10,
     date: "2026-08-15",
     displayDate: "15 August 2026",
-    title: "Chronicle of a Death Foretold: Chapter 1 Evidence Lab",
-    handoutTitle: "Chronicle of a Death Foretold · Chapter 1 Evidence Lab",
-    handoutUrl: "2026-08-15-chronicle-chapter-1-evidence-lab.html",
+    title: "Chronicle of a Death Foretold: Economic Situation, Social Status, and Power",
+    handoutTitle: "Economic Situation, Social Status, and Power",
+    handoutUrl: "2026-08-15-chronicle-economic-status-and-power.html",
+    handouts: [
+      {
+        title: "Economic Situation, Social Status, and Power",
+        url: "2026-08-15-chronicle-economic-status-and-power.html",
+      },
+      {
+        title: "Chapter 1 Evidence Lab · Original class plan",
+        url: "2026-08-15-chronicle-chapter-1-evidence-lab.html",
+      },
+    ],
     emptySectionMessages: false,
   },
 ];

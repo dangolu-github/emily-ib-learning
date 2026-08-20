@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Scene-and-theme evidence map for economic situation, social status, and power in Chronicle of a Death Foretold">
+  <title>Chronicle of a Death Foretold · Economic Situation, Social Status, and Power</title>
+  <style>
+    :root {
+      --ink: #20272c;
+      --muted: #5d686f;
+      --paper: #fff;
+      --soft: #f4f7f6;
+      --line: #d5dcda;
+      --teal: #176b68;
+      --teal-soft: #e4f1ef;
+      --brick: #963f36;
+      --brick-soft: #f7e9e6;
+      --gold: #8a611b;
+      --gold-soft: #fbf2dc;
+      --blue: #315f85;
+      --blue-soft: #e8f0f7;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #f0b429; outline-offset: 3px; }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 28px 58px; }
+    .hero { border-top: 8px solid var(--teal); border-bottom: 2px solid var(--brick); padding: 20px 0 18px; }
+    .kicker { margin: 0 0 7px; color: var(--brick); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 5vw, 45px); line-height: 1.08; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 17px; }
+    h2 { margin: 34px 0 14px; padding-bottom: 7px; color: var(--teal); border-bottom: 1px solid var(--line); font-size: 23px; }
+    h3 { margin: 0 0 7px; font-size: 17px; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0; padding-left: 23px; }
+    li { margin: 5px 0; }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
+    .print-button { border: 1px solid var(--teal); border-radius: 5px; padding: 8px 11px; color: var(--teal); background: #fff; font-weight: 700; cursor: pointer; }
+    .print-button:hover { background: var(--teal-soft); }
+    .contract, .test-claim, .accuracy, .worked, .action-box { border-radius: 7px; padding: 16px 18px; margin: 14px 0; }
+    .contract { border: 1px solid var(--teal); background: var(--teal-soft); }
+    .test-claim { border-left: 6px solid var(--gold); background: var(--gold-soft); font-family: Georgia, "Times New Roman", serif; font-size: 20px; }
+    .accuracy { border-left: 6px solid var(--brick); background: var(--brick-soft); }
+    .worked { border: 1px solid #e4c984; background: var(--gold-soft); }
+    .action-box { border: 1px solid var(--line); background: var(--soft); }
+    .grid-2, .grid-3 { display: grid; gap: 12px; align-items: stretch; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 7px; padding: 14px 16px; background: #fff; }
+    .card.teal { border-top: 4px solid var(--teal); }
+    .card.brick { border-top: 4px solid var(--brick); }
+    .card.gold { border-top: 4px solid var(--gold); }
+    .card.blue { border-top: 4px solid var(--blue); }
+    .tag { display: inline-block; margin-bottom: 7px; border-radius: 4px; padding: 3px 7px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .tag.direct { color: var(--teal); background: var(--teal-soft); }
+    .tag.strong { color: var(--brick); background: var(--brick-soft); }
+    .tag.mechanism { color: var(--blue); background: var(--blue-soft); }
+    .tag.secondary { color: var(--gold); background: var(--gold-soft); }
+    .scene { position: relative; padding-top: 18px; }
+    .scene-number { display: inline-grid; place-items: center; width: 29px; height: 29px; margin-bottom: 9px; border-radius: 50%; color: #fff; background: var(--brick); font-weight: 700; }
+    .locator { color: var(--muted); font-size: 12.5px; }
+    .evidence { margin: 10px 0; padding: 10px 12px; border-left: 4px solid var(--gold); background: var(--gold-soft); font-family: Georgia, "Times New Roman", serif; }
+    .scene dl { display: grid; gap: 8px; margin: 12px 0 0; }
+    .scene dt { color: var(--teal); font-weight: 700; }
+    .scene dd { margin: 2px 0 0; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 14px; }
+    th, td { border: 1px solid var(--line); padding: 10px 11px; vertical-align: top; }
+    th { color: #fff; background: var(--teal); text-align: left; }
+    tbody tr:nth-child(even) { background: var(--soft); }
+    .table-scroll { overflow-x: auto; }
+    .bridge-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 12px; }
+    .bridge-step { border: 1px solid #e4c984; border-radius: 6px; padding: 12px; background: #fff; }
+    .bridge-step strong { display: block; margin-bottom: 4px; color: var(--brick); }
+    .terms { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .term { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: #fff; font-size: 13px; }
+    .line { display: block; min-height: 29px; margin: 8px 0; border-bottom: 1px solid #788581; }
+    .small { color: var(--muted); font-size: 12.5px; }
+
+    @media (max-width: 820px) {
+      .page { padding: 22px 16px 40px; }
+      .grid-2, .grid-3, .bridge-steps { grid-template-columns: 1fr; }
+      table { min-width: 760px; }
+    }
+    @media print {
+      body { font-size: 10.5pt; }
+      .page { max-width: none; padding: 12mm; }
+      .top-actions { display: none; }
+      .grid-2, .grid-3, .bridge-steps, .scene, .worked, .action-box { break-inside: avoid; }
+      .table-scroll { overflow: visible; }
+      table { min-width: 0; font-size: 8.5pt; }
+      h2, h3 { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">IB English A · Literature Study · 15 August 2026</p>
+      <h1>Economic Situation, Social Status, and Power</h1>
+      <p class="subtitle"><em>Chronicle of a Death Foretold</em> · Scene-and-theme evidence map</p>
+      <div class="top-actions">
+        <button class="print-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+    </header>
+
+    <section class="contract" aria-labelledby="lesson-contract">
+      <h2 id="lesson-contract" style="margin-top:0">Lesson contract</h2>
+      <ul>
+        <li><strong>School prompt:</strong> To what extent are characters empowered or constrained by their economic situations?</li>
+        <li><strong>Focus:</strong> connect economic position to social status, gender, honor, and public reputation.</li>
+        <li><strong>Evidence job:</strong> move from a precise scene to an authorial choice and then to a qualified answer.</li>
+        <li><strong>Boundary:</strong> this page develops the class evidence bank; it does not add a new assignment.</li>
+      </ul>
+    </section>
+
+    <div class="test-claim">
+      Claim to test: money gives characters access, choice, and visibility, but social codes decide what that money can buy—and where it stops working.
+    </div>
+
+    <section aria-labelledby="foundation-title">
+      <h2 id="foundation-title">1. Build the connection in four steps</h2>
+      <div class="grid-2">
+        <article class="card teal"><h3>Economic situation</h3><p>Income, property, inheritance, occupation, family resources, and material security.</p></article>
+        <article class="card blue"><h3>Social status</h3><p>The respect, visibility, connections, and authority a community attaches to a person or family.</p></article>
+        <article class="card brick"><h3>Empowered</h3><p>A character gains realistic choices, influence, mobility, protection, or control over another person or situation.</p></article>
+        <article class="card gold"><h3>Constrained</h3><p>A character's choices narrow because of poverty, dependence, social expectation, gender, ethnicity, or reputation.</p></article>
+      </div>
+      <div class="terms" aria-label="Key analytical terms">
+        <span class="term">economic capital</span><span class="term">social prestige</span><span class="term">social mobility</span><span class="term">transactional marriage</span><span class="term">conspicuous consumption</span><span class="term">constrained agency</span><span class="term">commodification</span><span class="term">public spectacle</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="themes-title">
+      <h2 id="themes-title">2. Which context themes make the strongest link?</h2>
+      <div class="grid-3">
+        <article class="card teal"><span class="tag direct">Direct link</span><h3>Class and ethnicity</h3><p>Wealth changes marriage prospects, property ownership, and public authority. Santiago's wealth makes him privileged, while his Arab ancestry also marks him as partly outside the town.</p></article>
+        <article class="card brick"><span class="tag strong">Strong supporting link</span><h3>Gender codes</h3><p>Men are more able to turn money into choice and display. Women's economic security is tied more closely to marriage, domestic skill, and family approval.</p></article>
+        <article class="card brick"><span class="tag strong">Strong counterforce</span><h3>Honor culture</h3><p>Money can raise status, but it cannot cancel the town's rules about virginity, masculinity, and family reputation. Even the wealthy remain constrained by honor.</p></article>
+        <article class="card blue"><span class="tag mechanism">How status becomes power</span><h3>Small-town surveillance</h3><p>Wealth becomes social power because everybody sees, discusses, and evaluates it. The wedding converts private spending into public prestige.</p></article>
+        <article class="card gold"><span class="tag secondary">Secondary link</span><h3>Religion and ritual</h3><p>Religious ceremony can add legitimacy and status, but it is not the clearest economic link. Use it only when the scene also shows wealth, hierarchy, or public display.</p></article>
+        <article class="card gold"><span class="tag secondary">Useful distinction</span><h3>Institutions</h3><p>Family, church, and local authority distribute power, but the economic prompt needs a clear material link rather than an institution label on its own.</p></article>
+      </div>
+    </section>
+
+    <aside class="accuracy" aria-labelledby="accuracy-title">
+      <h2 id="accuracy-title" style="margin-top:0">Name check before using evidence</h2>
+      <p><strong>Bayardo San Román</strong> marries Angela Vicario and buys the widower Xius's house. <strong>Santiago Nasar</strong> is the wealthy Arab-descended victim; he does not propose to Angela.</p>
+    </aside>
+
+    <section aria-labelledby="scenes-title">
+      <h2 id="scenes-title">3. Scene evidence bank</h2>
+      <div class="grid-2">
+        <article class="card scene teal">
+          <span class="scene-number">1</span>
+          <h3>The Vicario family accepts Bayardo's proposal</h3>
+          <p class="locator">Chapter 2 · courtship and family decision</p>
+          <p class="evidence">The family is described as being of “modest means”; Pura answers Angela's lack of love with “Love can be learned too.”</p>
+          <dl>
+            <div><dt>Economic and social detail</dt><dd>Bayardo brings wealth, family prestige, and the promise of upward mobility.</dd></div>
+            <div><dt>Power effect</dt><dd>Bayardo is empowered to choose quickly. Angela's reluctance carries less authority than the family's economic and social calculation.</dd></div>
+            <div><dt>Writer's method</dt><dd>Contrast between modest means and elite status; compressed dialogue; irony in treating love as something that can follow the arrangement.</dd></div>
+          </dl>
+        </article>
+
+        <article class="card scene brick">
+          <span class="scene-number">2</span>
+          <h3>Bayardo buys the widower Xius's house</h3>
+          <p class="locator">Chapter 2 · the domino-table negotiation</p>
+          <p class="evidence">The widower says the house has no price; Bayardo raises the offer to “Ten thousand” and returns with the money.</p>
+          <dl>
+            <div><dt>Economic and social detail</dt><dd>Bayardo can turn immediate cash into control over property that carries another person's memories.</dd></div>
+            <div><dt>Power effect</dt><dd>The widower has legal choice, but the economic imbalance makes resistance painful and difficult. Bayardo performs masculine authority through purchasing power.</dd></div>
+            <div><dt>Writer's method</dt><dd>Escalating dialogue, exact monetary figures, public negotiation, and heart imagery oppose market price to emotional value.</dd></div>
+          </dl>
+        </article>
+
+        <article class="card scene gold">
+          <span class="scene-number">3</span>
+          <h3>The wedding becomes a public spectacle</h3>
+          <p class="locator">Chapters 1-2 · cost, gifts, guests, and town participation</p>
+          <p class="evidence">The celebration becomes a “public event”; Bayardo takes pride in a final cost of roughly twice Santiago's nine-thousand-peso estimate.</p>
+          <dl>
+            <div><dt>Economic and social detail</dt><dd>Gold gifts, musicians, food, alcohol, famous guests, and an open celebration make wealth visible to rich and poor alike.</dd></div>
+            <div><dt>Power effect</dt><dd>Spending produces admiration, gossip, and status. Bayardo briefly controls the town's attention, but the event also grows beyond his control.</dd></div>
+            <div><dt>Writer's method</dt><dd>Accumulation, numerical detail, collective narration, and excess turn the wedding into conspicuous consumption.</dd></div>
+          </dl>
+        </article>
+
+        <article class="card scene blue">
+          <span class="scene-number">4</span>
+          <h3>Bayardo returns Angela</h3>
+          <p class="locator">Chapter 2 · reversal after the wedding night</p>
+          <p class="evidence">The narrator suggests Bayardo tried to buy happiness with the weight of his power and fortune; the marriage then collapses under the honor code.</p>
+          <dl>
+            <div><dt>Economic and social detail</dt><dd>Bayardo can buy a house and fund a spectacle, but he cannot purchase love, certainty, or immunity from public shame.</dd></div>
+            <div><dt>Power effect</dt><dd>Wealth empowers the courtship, yet honor constrains Bayardo, Angela, and her family. Angela is treated as a returned possession and then punished.</dd></div>
+            <div><dt>Writer's method</dt><dd>Structural reversal, transactional imagery, symbols of purity, and juxtaposition of tenderness with family violence.</dd></div>
+          </dl>
+        </article>
+
+        <article class="card scene blue">
+          <span class="scene-number">5</span>
+          <h3>Santiago's inherited wealth and household power</h3>
+          <p class="locator">Chapter 1 · ranch, house, servants, and Divina Flor</p>
+          <p class="evidence">Santiago inherits a cattle ranch and has “a fortune of his own” at twenty-one, while Divina Flor fears the sexual power he exercises over her.</p>
+          <dl>
+            <div><dt>Economic and social detail</dt><dd>Property, weapons, servants, and inheritance give Santiago status and gendered authority.</dd></div>
+            <div><dt>Power effect</dt><dd>He can intimidate a dependent young woman, yet his wealth does not protect him once accusation and honor mobilize the town. His ethnicity complicates his insider status.</dd></div>
+            <div><dt>Writer's method</dt><dd>Juxtaposition makes Santiago both victim and privileged man; later testimony exposes the unequal household structure.</dd></div>
+          </dl>
+        </article>
+
+        <article class="card scene teal">
+          <span class="scene-number">6</span>
+          <h3>Angela builds a different kind of agency</h3>
+          <p class="locator">Chapter 4 · embroidery, work, and years of letters</p>
+          <p class="evidence">Through work and writing, Angela becomes “mistress of her own free will” even though her economic position is not transformed by sudden wealth.</p>
+          <dl>
+            <div><dt>Economic and social detail</dt><dd>Her skilled labor gives routine and some independence; her letters create a private voice beyond family control.</dd></div>
+            <div><dt>Power effect</dt><dd>This scene qualifies a purely economic answer: agency can grow through craft, language, persistence, and self-definition.</dd></div>
+            <div><dt>Writer's method</dt><dd>Long time shift, repeated letters, and character transformation contrast the rejected bride with the later self-directed woman.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="relationship-title">
+      <h2 id="relationship-title">4. Relationship map: what, how, and why</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Scene</th><th>Main theme link</th><th>How Márquez presents it</th><th>Prompt value</th><th>Useful contrast</th></tr></thead>
+          <tbody>
+            <tr><td>Proposal accepted</td><td>Class + gender</td><td>Family contrast and decisive dialogue</td><td>Economic mobility narrows Angela's choice</td><td>Angela's later self-direction</td></tr>
+            <tr><td>Widower Xius's house</td><td>Class + masculinity</td><td>Escalating price and heart imagery</td><td>Cash overcomes emotional resistance</td><td>Money cannot secure the marriage</td></tr>
+            <tr><td>Public wedding</td><td>Class + surveillance</td><td>Accumulation, numbers, excess</td><td>Spending becomes visible prestige</td><td>The event escapes Bayardo's control</td></tr>
+            <tr><td>Angela returned</td><td>Honor + gender</td><td>Reversal and transactional imagery</td><td>Honor limits the reach of wealth</td><td>Bayardo's earlier purchasing power</td></tr>
+            <tr><td>Santiago's household</td><td>Class + ethnicity + gender</td><td>Juxtaposition and later testimony</td><td>Privilege can empower and still fail to protect</td><td>Divina Flor's economic dependence</td></tr>
+            <tr><td>Angela's later life</td><td>Agency + transformation</td><td>Time shift, labor, repeated letters</td><td>Not all agency comes from economic advantage</td><td>Her constrained courtship</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="worked" aria-labelledby="worked-title">
+      <h2 id="worked-title" style="margin-top:0">5. Worked bridge: widower Xius's house</h2>
+      <div class="bridge-steps">
+        <div class="bridge-step"><strong>Moment</strong>Bayardo keeps raising the offer after Xius says the house is not for sale.</div>
+        <div class="bridge-step"><strong>Method</strong>Repeated dialogue and exact figures make the encounter sound like an auction, while heart imagery preserves the house's emotional value.</div>
+        <div class="bridge-step"><strong>Meaning</strong>Bayardo's economic capital becomes masculine and social power because he can make another person's resistance increasingly costly.</div>
+        <div class="bridge-step"><strong>Qualification</strong>Xius can still say no, so the scene shows constrained agency rather than the complete absence of choice.</div>
+      </div>
+      <p><strong>Portable sentence:</strong> Through escalating monetary offers and contrasting heart imagery, Márquez shows that wealth expands Bayardo's power by turning a cherished home into a negotiable object, while the widower's grief reveals what market value cannot measure.</p>
+    </section>
+
+    <section class="action-box" aria-labelledby="action-title">
+      <h2 id="action-title" style="margin-top:0">6. Build a balanced response</h2>
+      <ol>
+        <li>Choose one scene where money clearly <strong>empowers</strong> a character.</li>
+        <li>Choose one scene where the same economic power <strong>constrains someone else</strong>.</li>
+        <li>Add one counter-scene where honor, gender, ethnicity, emotion, or personal transformation limits a purely economic explanation.</li>
+        <li>For each scene, name one authorial choice before explaining the wider meaning.</li>
+      </ol>
+      <p><strong>Working claim:</strong> Economic situation empowers characters when…</p><span class="line"></span>
+      <p><strong>Qualification:</strong> However, this power is limited when…</p><span class="line"></span>
+      <p><strong>Best evidence pair:</strong></p><span class="line"></span>
+      <p class="small">Next annotation action: mark your two chosen scenes in the novel, then label each one <strong>economic detail → status effect → power or constraint → authorial choice</strong>.</p>
+    </section>
+  </main>
+</body>
+</html>

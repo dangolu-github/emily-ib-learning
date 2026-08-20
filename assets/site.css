@@ -276,6 +276,10 @@ button:active:not(:disabled) {
   color: var(--berry);
 }
 
+.handout-link + .handout-link {
+  margin-top: 0.75rem;
+}
+
 .material-content {
   margin: 1.25rem 0 0 72px;
 }
