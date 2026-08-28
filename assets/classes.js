@@ -332,6 +332,41 @@ window.EMILY_CLASSES = [
         url: "2026-08-15-chronicle-chapter-1-evidence-lab.html",
       },
     ],
+    homework: {
+      assignmentId: "emily-ib-2026-08-15-balanced-response",
+      title: "Build a balanced response",
+      prompt:
+        "Do the task list at the end of the handout (Section 6, Build a balanced response).",
+      checklist: [],
+      responseLabel: "Your response",
+      responsePlaceholder: "Write your response here…",
+      maxLength: 12000,
+    },
+    emptySectionMessages: false,
+  },
+  {
+    number: 11,
+    date: "2026-08-22",
+    displayDate: "22 August 2026",
+    title: "Individual Oral Planning: Hedda Gabler and Parasite",
+    handoutTitle: "IO Planning Workspace · Hedda Gabler + Parasite",
+    handoutUrl: "2026-08-22-io-planning-workspace.html",
+    homework: {
+      assignmentId: "emily-ib-2026-08-22-io-scene-prep",
+      title: "IO scene search and relationship map",
+      prompt:
+        "These tasks come from the class on 22 August. Put your scene ideas straight into the IO Planning Workspace above — it saves and syncs automatically. Use the box below only if you also want to send notes or your relationship map text to your teacher.",
+      checklist: [
+        "Hedda Gabler and Parasite: find the specific plot moments or scenes that show the global issue, and jot your ideas in the IO Planning Workspace before next session. Do not write the full draft yet.",
+        "Complete the relationship map chart — the format is Section 4 of the Economic Situation, Social Status, and Power handout — for at least one of the Chapter 2 scenes chosen in class: Bayardo returns Angela, or the Vicario family accepts Bayardo's proposal. Include quotations, characters, themes, context, wider meaning, and techniques.",
+        "Ask your school teacher about the IO and TOK: the exact requirements, rubrics, and which text selections are allowed for mocks versus the formal assessments.",
+        "Confirm the exact title of the photography work you study at school (the “Sings the Blues” one) and send it to your teacher.",
+        "Re-read your annotated writing practice: crossed-out lines mark issues; the comments will be explained next class.",
+      ],
+      responseLabel: "Your notes or relationship map (optional)",
+      responsePlaceholder: "Paste your relationship map text or scene notes here…",
+      maxLength: 12000,
+    },
     emptySectionMessages: false,
   },
 ];
