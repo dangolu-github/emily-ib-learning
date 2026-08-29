@@ -360,7 +360,6 @@ window.EMILY_CLASSES = [
         "Hedda Gabler and Parasite: find the specific plot moments or scenes that show the global issue, and jot your ideas in the IO Planning Workspace before next session. Do not write the full draft yet.",
         "Complete the relationship map chart — the format is Section 4 of the Economic Situation, Social Status, and Power handout — for at least one of the Chapter 2 scenes chosen in class: Bayardo returns Angela, or the Vicario family accepts Bayardo's proposal. Include quotations, characters, themes, context, wider meaning, and techniques.",
         "Ask your school teacher about the IO and TOK: the exact requirements, rubrics, and which text selections are allowed for mocks versus the formal assessments.",
-        "Confirm the exact title of the photography work you study at school (the “Sings the Blues” one) and send it to your teacher.",
         "Re-read your annotated writing practice: crossed-out lines mark issues; the comments will be explained next class.",
       ],
       responseLabel: "Your notes or relationship map (optional)",
