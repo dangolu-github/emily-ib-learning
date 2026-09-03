@@ -368,4 +368,13 @@ window.EMILY_CLASSES = [
     },
     emptySectionMessages: false,
   },
+  {
+    number: 12,
+    date: "2026-08-29",
+    displayDate: "29 August 2026",
+    title: "Mock Individual Oral Planning: Chronicle of a Death Foretold and Hassani",
+    handoutTitle: "Mock IO Planning Workspace · Chronicle + Hassani",
+    handoutUrl: "2026-08-29-io-planning-workspace.html",
+    emptySectionMessages: false,
+  },
 ];

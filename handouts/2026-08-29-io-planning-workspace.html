@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shared planning workspace for the mock Individual Oral: Chronicle of a Death Foretold and Hassani">
+  <title>Mock IO Planning Workspace · Chronicle + Hassani</title>
+  <script src="../assets/config.js?v=20260903-c12-io" defer></script>
+  <script src="../assets/api.js?v=20260903-c12-io" defer></script>
+  <style>
+    :root {
+      --ink: #20272c;
+      --muted: #5d686f;
+      --paper: #fff;
+      --soft: #f4f7f6;
+      --line: #d5dcda;
+      --teal: #176b68;
+      --teal-soft: #e4f1ef;
+      --brick: #963f36;
+      --brick-soft: #f7e9e6;
+      --gold: #8a611b;
+      --gold-soft: #fbf2dc;
+      --blue: #315f85;
+      --blue-soft: #e8f0f7;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+    button, a, input { font: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #f0b429; outline-offset: 3px; }
+    .page { max-width: 980px; margin: 0 auto; padding: 32px 28px 58px; }
+    .hero { border-top: 8px solid var(--teal); border-bottom: 2px solid var(--brick); padding: 20px 0 18px; }
+    .kicker { margin: 0 0 7px; color: var(--brick); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 5vw, 42px); line-height: 1.08; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 17px; }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; align-items: center; }
+    .print-button { border: 1px solid var(--teal); border-radius: 5px; padding: 8px 11px; color: var(--teal); background: #fff; font-weight: 700; cursor: pointer; }
+    .print-button:hover { background: var(--teal-soft); }
+
+    .sync-bar {
+      position: sticky; top: 0; z-index: 30;
+      display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+      margin: 18px -28px 0; padding: 9px 28px;
+      background: var(--soft); border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .sync-status { color: var(--muted); }
+    .sync-status[data-state="saved"] { color: var(--teal); font-weight: 700; }
+    .sync-status[data-state="error"], .sync-status[data-state="local"] { color: var(--brick); font-weight: 700; }
+    .editor-chip { display: inline-flex; gap: 6px; align-items: center; }
+    .editor-chip button {
+      border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px;
+      background: #fff; cursor: pointer; color: var(--muted);
+    }
+    .editor-chip button[aria-pressed="true"] {
+      border-color: var(--teal); background: var(--teal-soft); color: var(--teal); font-weight: 700;
+    }
+    .toolbar { display: inline-flex; gap: 6px; }
+    .toolbar button {
+      border: 1px solid var(--line); border-radius: 5px; min-width: 34px; padding: 3px 8px;
+      background: #fff; cursor: pointer;
+    }
+    .toolbar button:hover { background: var(--teal-soft); }
+
+    .notice {
+      border-radius: 7px; padding: 12px 16px; margin: 16px 0; font-size: 15px;
+      border: 1px solid var(--line); background: var(--soft);
+    }
+    .notice.update { border-color: var(--blue); background: var(--blue-soft); }
+    .notice.warn { border-color: var(--brick); background: var(--brick-soft); }
+    .notice[hidden] { display: none; }
+    .unlock-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .unlock-row input { border: 1px solid var(--line); border-radius: 5px; padding: 7px 10px; }
+    .unlock-row button { border: 1px solid var(--teal); border-radius: 5px; padding: 7px 12px; color: #fff; background: var(--teal); font-weight: 700; cursor: pointer; }
+
+    .workdoc {
+      margin-top: 20px; padding: 6px 2px 40px; min-height: 60vh;
+      caret-color: var(--teal);
+    }
+    .workdoc:focus { outline: none; }
+    .workdoc[contenteditable="true"] { cursor: text; }
+    .workdoc h2 { margin: 34px 0 14px; padding-bottom: 7px; color: var(--teal); border-bottom: 1px solid var(--line); font-size: 23px; font-family: Georgia, "Times New Roman", serif; }
+    .workdoc h3 { margin: 18px 0 7px; font-size: 17px; }
+    .workdoc p { margin: 8px 0; }
+    .workdoc ul, .workdoc ol { margin: 8px 0; padding-left: 23px; }
+    .workdoc li { margin: 5px 0; }
+    .workdoc blockquote {
+      margin: 14px 0; padding: 14px 18px; border-left: 6px solid var(--gold);
+      background: var(--gold-soft); font-family: Georgia, "Times New Roman", serif; font-size: 19px;
+    }
+    .workdoc mark { background: #ffe9a8; padding: 0 2px; }
+    .workdoc .fill-in { background: var(--blue-soft); border: 1px dashed var(--blue); border-radius: 5px; padding: 10px 14px; margin: 8px 0; }
+    .workdoc .set-aside { color: var(--muted); }
+    .workdoc .set-aside strong { color: inherit; }
+
+    @media print {
+      .sync-bar, .top-actions, .notice { display: none !important; }
+      .hero { border-top: none; }
+      body { font-size: 12pt; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="kicker">Individual Oral · Mock planning</p>
+      <h1>IO Planning Workspace</h1>
+      <p class="subtitle"><em>Chronicle of a Death Foretold</em> + Hassani · a shared working document — you and your teacher edit the same page, and every change syncs for both of you.</p>
+      <div class="top-actions">
+        <button type="button" class="print-button" id="print-page">Print / Save as PDF</button>
+      </div>
+    </header>
+
+    <div class="sync-bar">
+      <span class="editor-chip" id="editor-chip">
+        <span>Editing as</span>
+        <button type="button" data-editor="Emily">Emily</button>
+        <button type="button" data-editor="Teacher">Teacher</button>
+      </span>
+      <span class="toolbar" id="toolbar" aria-label="Formatting">
+        <button type="button" data-command="bold" title="Bold"><strong>B</strong></button>
+        <button type="button" data-command="italic" title="Italic"><em>I</em></button>
+        <button type="button" data-command="insertUnorderedList" title="Bullet list">• list</button>
+        <button type="button" data-command="highlight" title="Highlight"><mark>ab</mark></button>
+        <button type="button" id="restore-notes" title="Replace the document with the original class notes">Restore class notes</button>
+      </span>
+      <span class="sync-status" id="sync-status" aria-live="polite">Loading the shared document…</span>
+    </div>
+
+    <div class="notice warn" id="unlock-notice" hidden>
+      <strong>Enter the access word once to edit on this browser.</strong> You can read the page without it.
+      <div class="unlock-row">
+        <input type="password" id="unlock-word" autocomplete="current-password" aria-label="Access word">
+        <button type="button" id="unlock-button">Unlock editing</button>
+      </div>
+      <p class="unlock-error" id="unlock-error" role="alert" hidden></p>
+    </div>
+
+    <div class="notice update" id="remote-notice" hidden></div>
+    <div class="notice" id="mode-notice" hidden></div>
+
+    <article class="workdoc" id="workdoc" aria-label="Shared IO planning document"></article>
+  </div>
+
+  <template id="seed-content">
+    <p><strong>Works studied:</strong>&nbsp;</p><p>Chronicle of a Death Foretold · Hedda Gabler ·&nbsp; Carol Ann Duffy poetry</p><p>Parasite (film) · Hassani (non-literary) · photography work (BALTIMORE SINGS THE BLUES)&nbsp;</p>
+        <h2>Mock IO — <em>Chronicle</em> + Hassani</h2>
+        <h3>Text pairing</h3>
+        <ul>
+          <li><em>Chronicle of a Death Foretold</em> — literary work.</li>
+          <li>Hassani's <em>Dreaming Graffiti</em> — non-literary body of work.</li>
+          <li>Reported school guidance: this pairing is possible. A non-literary work may be repeated, but a literary work may not.</li>
+        </ul>
+        <h3>Global issue</h3>
+        <blockquote>How cultural values and beliefs reinforce patriarchal power, suppressing women's voices and self-expression.</blockquote>
+        <h3>Links to the global issue</h3>
+        <ul>
+          <li><em>Chronicle of a Death Foretold</em>: power and control are reinforced through patriarchal cultural expectations. The exact literary extract and evidence chain still need to be selected.</li>
+          <li>Hassani: patriarchal power limits women's voices, choices, and self-expression. Focus on the visual choices that make this restriction visible.</li>
+        </ul>
+        <h2>Hassani — 4–4.5 minutes</h2>
+        <p><strong>Structure:</strong> analyse one artwork closely, then connect it to 3–5 wider examples from <em>Dreaming Graffiti</em>. Do not treat the whole collection as the single specific work.</p>
+        <h3>Choose one specific artwork</h3>
+        <ol>
+          <li><strong>Kneeling or downward-facing figure:</strong> position and body posture may suggest surrender to social or patriarchal constraints, self-suppression, and voicelessness.</li>
+          <li><strong>Giant female figure:</strong> scale, layering, and colour contrast may reveal the relationship between the woman and the surrounding space.</li>
+          <li><strong>Hijab-centred figure:</strong> colour, pattern, and added visual elements may strengthen the cultural dimension of the argument. Confirm the exact artwork and terminology before drafting.</li>
+        </ol>
+        <h3>Wider body of work</h3>
+        <ol>
+          <li><strong>Mouth and eyes:</strong> the absent or obscured mouth and the closed eyes create an unsettling imbalance; the eyelashes draw attention to the face and may support the idea of voicelessness.</li>
+          <li><strong>Instrument:</strong> its foreground position and strings may work symbolically or metaphorically to connect voice, expression, and restriction.</li>
+          <li><strong>Environment-integrated work:</strong> the figure's interaction with the setting and the matching shapes may show how the environment becomes part of the work's meaning and engages the viewer.</li>
+        </ol>
+        <h3>Build each analytical point</h3>
+        <ol>
+          <li>Name the precise visual choice.</li>
+          <li>Describe the relevant detail.</li>
+          <li>Explain its effect or implication.</li>
+          <li>Connect that effect directly to the global issue.</li>
+          <li>Link the specific work to the wider body of work.</li>
+        </ol>
+        <p><strong>Timing:</strong> allow roughly 2–3 minutes for the specific work and about 2 minutes for the wider body of work. Aim for three clear analytical points. Confirm the exact format with school.</p>
+        <p><br></p>
+        <h2>Formal IO — 24 November</h2><p><strong>Text pairing</strong></p>
+        <ul>
+          <li><strong>Hedda Gabler (literary) + Parasite (non-literary) [2min].</strong></li>
+          <li>Chronicle of a Death Foretold stays reserved for the written exam, because it is the easier text to write an essay on — Hedda Gabler is harder to use in an essay, so it is better spent on the IO. Parasite is the non-literary work you know best.</li>
+          <li>Hedda Gabler + Hassani has the strongest gender linkage, but gender/feminism and manipulation are two commonly chosen IO topics, so this pairing remains a backup.</li>
+          <li>Confirm with school whether this is the formal IO and which texts are allowed for the mock and formal assessments.</li>
+        </ul>
+        <p><br></p>
+        <p><strong>Global issue</strong></p>
+        <p><strong>How societal constraints developed from honor culture entrap one individual to final self-destruction.</strong></p>
+        <ul>
+          <li>Cause → effect: societal constraints shaped by honour culture → self-destruction.</li>
+          <li>Field of inquiry: culture, identity and community.</li>
+          <li>Angle: resistance and constraint — made specific as societal constraint developed from honor culture. On their own, “resistance and constraint” are only helper terms; the named cause and result carry the issue.</li>
+          <li>❎ Set aside as the headline: power and control / manipulation — they fit both works, but they are common IO focuses; keep them as supporting themes inside the analysis.</li>
+        </ul>
+        <p><br></p>
+        <p><strong>Themes across both works</strong></p>
+        <ul>
+          <li>Strong: societal constraint by honor culture · reputation and social judgement · desire · social hierarchy · family relationship.</li>
+          <li>Supporting: manipulation / power and control · gender roles and gender oppression (patriarchy is strong in both) · pride · deception (in both works it leads to destruction).</li>
+          <li>Parked for later: poverty (Parasite only) · provincialism · freedom and emptiness (Hedda only).</li>
+        </ul>
+        <p><br></p>
+        <p><strong>Hedda Gabler — possible scenes and analytical chain</strong></p>
+        <ul>
+          <li>Scandal / threat scenes — Judge Brack’s threatening; how afraid she is of the scandal. This is the honor-culture pressure.</li>
+          <li>Honeymoon — keeping up the “loving image”; how society requires a woman to display a decent profile.</li>
+          <li>The ending — the guns; once she gains power she starts losing control; the mental breakdown is the representation of self-destruction (she destroys more than herself).</li>
+          <li>Analysis chain: reputation / social profile → desire (to protect reputation and social judgement) → power → losing control (mental breakdown) → self-destruction — with deception running underneath.</li>
+          <li>If one plot is selected, the ending works best because the plot line must be continuous.</li>
+        </ul>
+        <p><br></p>
+        <p><strong>Parasite — constraint chain and themes</strong></p>
+        <ul>
+          <li>The family wants to escape low social status → climbing the social hierarchy → East Asian family honor → the shame of living underground.</li>
+          <li>shaming culture and honor-culture link — it matches the scandal-threat pressure in Hedda Gabler.</li>
+          <li>Living space is the visible constraint: when living space is constrained, freedom is constrained, and self-agency starts being lost. (Hedda goes one level further — not just losing self-agency but losing control completely.)</li>
+          <li>Related themes: wealth · power · pride (very strong in Asian family culture) · deception.</li>
+          <li>Choose a specific clip with strong filmic techniques.</li>
+        </ul>
+        <p><br></p>
+        <p><strong>IO requirements</strong></p>
+        <ul>
+          <li>Analyse the chosen extract (its important lines) AND the wider context of the whole work — both, for each text.</li>
+          <li>Aim for 3–5 analytical angles.</li>
+          <li>Before drafting, identify the specific plots or clips and record the main ideas. Organize the evidence and structure before writing the full draft.</li>
+          <li>Confirm the exact IO scope, requirements, and text rules for the mock and formal assessments.</li>
+          <li>Formal IO: around mid-November.</li>
+        </ul>
+        <p><br></p>
+        <p><strong>Ideas and resources</strong></p>
+        <ul>
+          <li>Hedda Gabler — scene ideas: …</li>
+          <li>Parasite — clip ideas: …</li>
+          <li>Resources / links: …</li>
+        </ul>
+  </template>
+
+  <script>
+  (function () {
+    "use strict";
+
+    const WORKSPACE_ID = "emily-ib-2026-08-29-io-workspace";
+    const CACHE_KEY = "emilyIoWorkspace:" + WORKSPACE_ID + ":v2";
+    const EDITOR_KEY = "emilyIoWorkspaceEditorV1";
+    const TOKEN_KEY = "emilyIbPortalAccessV1";
+    const MAX_LENGTH = 42000;
+    const IDLE_POLL_MS = 8000;
+
+    const doc = document.getElementById("workdoc");
+    const statusEl = document.getElementById("sync-status");
+    const remoteNotice = document.getElementById("remote-notice");
+    const modeNotice = document.getElementById("mode-notice");
+    const unlockNotice = document.getElementById("unlock-notice");
+    const unlockWord = document.getElementById("unlock-word");
+    const unlockButton = document.getElementById("unlock-button");
+    const unlockError = document.getElementById("unlock-error");
+    const editorChip = document.getElementById("editor-chip");
+
+    let revision = 0;
+    let dirty = false;
+    let saving = false;
+    let syncEnabled = false;
+    let lastInputAt = 0;
+    let saveTimer = 0;
+    let pollTimer = 0;
+    let editorName = "";
+
+    function readStorage(key) {
+      try { return localStorage.getItem(key) || ""; } catch { return ""; }
+    }
+    function writeStorage(key, value) {
+      try { localStorage.setItem(key, value); } catch { /* in-memory only */ }
+    }
+
+    function api() { return window.EmilyPortalApi; }
+    function token() { return readStorage(TOKEN_KEY); }
+
+    function setStatus(message, state) {
+      statusEl.textContent = message;
+      statusEl.dataset.state = state || "";
+    }
+
+    function showMode(message) {
+      if (!message) { modeNotice.hidden = true; return; }
+      modeNotice.textContent = message;
+      modeNotice.hidden = false;
+    }
+
+    function showRemote(message) {
+      if (!message) { remoteNotice.hidden = true; return; }
+      remoteNotice.textContent = message;
+      remoteNotice.hidden = false;
+      window.clearTimeout(showRemote.timer);
+      showRemote.timer = window.setTimeout(() => { remoteNotice.hidden = true; }, 9000);
+    }
+
+    const ALLOWED_TAGS = new Set([
+      "P", "H2", "H3", "H4", "UL", "OL", "LI", "STRONG", "EM", "B", "I", "U",
+      "MARK", "BR", "DIV", "SPAN", "BLOCKQUOTE",
+    ]);
+    const ALLOWED_CLASSES = new Set(["fill-in", "set-aside"]);
+
+    function sanitize(html) {
+      const container = document.createElement("div");
+      container.innerHTML = html;
+      const walk = (node) => {
+        [...node.children].forEach((child) => {
+          if (!ALLOWED_TAGS.has(child.tagName)) {
+            const text = document.createTextNode(child.textContent || "");
+            child.replaceWith(text);
+            return;
+          }
+          [...child.attributes].forEach((attribute) => {
+            if (attribute.name === "class") {
+              const kept = child.className
+                .split(/\s+/)
+                .filter((name) => ALLOWED_CLASSES.has(name))
+                .join(" ");
+              if (kept) child.className = kept;
+              else child.removeAttribute("class");
+              return;
+            }
+            if (attribute.name === "style") {
+              const backgroundOnly = attribute.value
+                .split(";")
+                .map((part) => part.trim())
+                .filter((part) => /^background-color\s*:/i.test(part))
+                .join("; ");
+              if (backgroundOnly) child.setAttribute("style", backgroundOnly);
+              else child.removeAttribute("style");
+              return;
+            }
+            child.removeAttribute(attribute.name);
+          });
+          walk(child);
+        });
+      };
+      walk(container);
+      return container.innerHTML;
+    }
+
+    function seedHtml() {
+      return document.getElementById("seed-content").innerHTML.trim().replace(/\n {4}/g, "\n");
+    }
+
+    function currentHtml() {
+      return doc.innerHTML;
+    }
+
+    function adoptContent(html) {
+      doc.innerHTML = sanitize(html);
+    }
+
+    function cacheLocal() {
+      writeStorage(
+        CACHE_KEY,
+        JSON.stringify({ revision, content: currentHtml(), at: new Date().toISOString() }),
+      );
+    }
+
+    function loadCache() {
+      try { return JSON.parse(readStorage(CACHE_KEY) || "null"); } catch { return null; }
+    }
+
+    function setEditable(editable) {
+      doc.setAttribute("contenteditable", editable ? "true" : "false");
+    }
+
+    function chooseEditor(name) {
+      editorName = name;
+      writeStorage(EDITOR_KEY, name);
+      [...editorChip.querySelectorAll("button")].forEach((button) => {
+        button.setAttribute("aria-pressed", button.dataset.editor === name ? "true" : "false");
+      });
+    }
+
+    function requireUnlock() {
+      unlockNotice.hidden = false;
+      setEditable(false);
+      setStatus("Read-only until this browser is unlocked.", "local");
+    }
+
+    async function unlock() {
+      unlockButton.disabled = true;
+      unlockError.hidden = true;
+      try {
+        const data = new TextEncoder().encode(unlockWord.value.trim().toLowerCase());
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const answerHash = Array.from(new Uint8Array(hashBuffer))
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
+        const result = await api().jsonp("verifyPortalAccess", { answerHash });
+        if (!result?.ok || !result.allowed || !result.accessToken) {
+          throw new Error("That access word is not correct.");
+        }
+        writeStorage(TOKEN_KEY, result.accessToken);
+        unlockWord.value = "";
+        unlockNotice.hidden = true;
+        setEditable(true);
+        initializeSync();
+      } catch (reason) {
+        unlockError.textContent =
+          reason instanceof Error ? reason.message : "The portal could not check access.";
+        unlockError.hidden = false;
+      } finally {
+        unlockButton.disabled = false;
+      }
+    }
+
+    function scheduleSave() {
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(save, 1500);
+    }
+
+    async function readRemote() {
+      return api().jsonp("getSharedWorkspace", {
+        accessToken: token(),
+        workspaceId: WORKSPACE_ID,
+      });
+    }
+
+    async function save(attempt) {
+      attempt = attempt || 0;
+      if (!syncEnabled || saving) { if (saving) scheduleSave(); return; }
+      const html = currentHtml();
+      if (!html.trim()) return;
+      if (html.length > MAX_LENGTH) {
+        setStatus("The document is too long to sync — trim it a little.", "error");
+        return;
+      }
+      saving = true;
+      dirty = false;
+      const baseRevision = revision;
+      const savedAtInput = lastInputAt;
+      setStatus("Saving…", "saving");
+      try {
+        await api().post({
+          action: "saveSharedWorkspace",
+          accessToken: token(),
+          workspaceId: WORKSPACE_ID,
+          editor: editorName || "Portal editor",
+          baseRevision,
+          content: html,
+        });
+        const result = await readRemote();
+        if (result?.ok && !result.pending && result.revision === baseRevision + 1) {
+          revision = result.revision;
+          cacheLocal();
+          setStatus(
+            "All changes saved · synced" + (editorName ? " as " + editorName : ""),
+            "saved",
+          );
+        } else if (result?.ok) {
+          const remoteRevision = Number(result.revision) || 0;
+          if (remoteRevision !== baseRevision && attempt < 3) {
+            revision = remoteRevision;
+            if (lastInputAt > savedAtInput || dirty) {
+              saving = false;
+              return save(attempt + 1);
+            }
+            if (!result.pending && result.content) {
+              adoptContent(result.content);
+              cacheLocal();
+              showRemote(
+                "Updated by " + (result.updatedBy || "the other editor") +
+                " — this page now shows the latest version.",
+              );
+              setStatus("Synced to the latest version.", "saved");
+            }
+          } else if (attempt < 3) {
+            saving = false;
+            return save(attempt + 1);
+          } else {
+            dirty = true;
+            setStatus("Saved on this device; sync will retry.", "local");
+            scheduleSave();
+          }
+        }
+      } catch (reason) {
+        dirty = true;
+        cacheLocal();
+        const message = reason instanceof Error ? reason.message : "";
+        if (/unknown action/i.test(message)) {
+          syncEnabled = false;
+          showMode(
+            "Live sync is not switched on yet — your edits are kept safely on this device and will sync once it is.",
+          );
+          setStatus("Saved on this device.", "local");
+        } else if (/access/i.test(message)) {
+          requireUnlock();
+        } else {
+          setStatus("Offline — saved on this device; sync will retry.", "local");
+          scheduleSave();
+        }
+      } finally {
+        saving = false;
+      }
+    }
+
+    async function poll() {
+      window.clearTimeout(pollTimer);
+      pollTimer = window.setTimeout(poll, IDLE_POLL_MS);
+      if (!syncEnabled || saving || dirty) return;
+      if (Date.now() - lastInputAt < 6000) return;
+      try {
+        const result = await readRemote();
+        if (result?.ok && !result.pending && Number(result.revision) > revision) {
+          revision = Number(result.revision);
+          adoptContent(result.content || "");
+          cacheLocal();
+          showRemote(
+            "Updated by " + (result.updatedBy || "the other editor") +
+            (result.updatedAt ? " · " + result.updatedAt : "") + ".",
+          );
+          setStatus("Synced to the latest version.", "saved");
+        }
+      } catch { /* next poll retries */ }
+    }
+
+    async function initializeSync() {
+      if (!api() || !api().ready()) {
+        showMode("The private portal service is not configured; this page works on this device only.");
+        setStatus("Saved on this device only.", "local");
+        return;
+      }
+      if (!token()) { requireUnlock(); return; }
+      try {
+        const result = await readRemote();
+        syncEnabled = true;
+        showMode("");
+        if (result?.ok && !result.pending && result.content) {
+          const remoteRevision = Number(result.revision) || 0;
+          const localAhead =
+            remoteRevision === revision && sanitize(result.content) !== currentHtml();
+          if (localAhead) {
+            dirty = true;
+            setStatus("This device has newer edits — syncing them now…", "saving");
+            scheduleSave();
+          } else {
+            revision = remoteRevision;
+            adoptContent(result.content);
+            cacheLocal();
+            setStatus(
+              "Synced · last edit by " + (result.updatedBy || "your class") +
+              (result.updatedAt ? " · " + result.updatedAt : ""),
+              "saved",
+            );
+          }
+        } else {
+          revision = 0;
+          setStatus("Shared document ready — your first edit starts the sync.", "saved");
+        }
+        setEditable(true);
+        poll();
+      } catch (reason) {
+        const message = reason instanceof Error ? reason.message : "";
+        if (/unknown action/i.test(message)) {
+          showMode(
+            "Live sync is not switched on yet — your edits are kept safely on this device and will sync once it is.",
+          );
+          setStatus("Saved on this device.", "local");
+          setEditable(true);
+        } else if (/access/i.test(message)) {
+          requireUnlock();
+        } else {
+          showMode("The shared document could not be reached — edits stay on this device and sync will retry.");
+          setStatus("Saved on this device.", "local");
+          setEditable(true);
+          window.clearTimeout(pollTimer);
+          pollTimer = window.setTimeout(initializeSync, 20000);
+        }
+      }
+    }
+
+    function initializeContent() {
+      const cached = loadCache();
+      if (cached && cached.content) {
+        revision = Number(cached.revision) || 0;
+        adoptContent(cached.content);
+      } else {
+        adoptContent(seedHtml());
+      }
+    }
+
+    document.getElementById("print-page").addEventListener("click", () => window.print());
+
+    document.getElementById("restore-notes").addEventListener("click", () => {
+      const confirmed = window.confirm(
+        "Replace the current document with the original class notes? Every earlier version stays saved in the history.",
+      );
+      if (!confirmed) return;
+      adoptContent(seedHtml());
+      dirty = true;
+      lastInputAt = Date.now();
+      cacheLocal();
+      setStatus("Class notes restored — saving…", "saving");
+      scheduleSave();
+    });
+
+    unlockButton.addEventListener("click", unlock);
+    unlockWord.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        unlock();
+      }
+    });
+
+    document.getElementById("toolbar").addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-command]");
+      if (!button) return;
+      event.preventDefault();
+      doc.focus();
+      if (button.dataset.command === "highlight") {
+        document.execCommand("hiliteColor", false, "#ffe9a8");
+      } else {
+        document.execCommand(button.dataset.command, false);
+      }
+    });
+
+    editorChip.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-editor]");
+      if (button) chooseEditor(button.dataset.editor);
+    });
+
+    doc.addEventListener("input", () => {
+      dirty = true;
+      lastInputAt = Date.now();
+      cacheLocal();
+      setStatus("Editing…", "saving");
+      scheduleSave();
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initializeContent();
+      const savedEditor = readStorage(EDITOR_KEY);
+      if (savedEditor) chooseEditor(savedEditor);
+      setEditable(true);
+      initializeSync();
+    });
+  })();
+  </script>
+</body>
+</html>
